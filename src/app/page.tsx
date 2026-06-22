@@ -1,63 +1,72 @@
+import Link from "next/link";
 import Image from "next/image";
+import { ArrowRight, BookOpen, Globe } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen flex flex-col items-center justify-center p-8 bg-background overflow-hidden relative">
+      {/* Decorative background elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 opacity-10 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-jade blur-[100px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-crimson blur-[100px]" />
+      </div>
+
+      <main className="z-10 max-w-4xl w-full text-center space-y-12">
+        <div className="space-y-6">
+          <h1 className="text-6xl md:text-8xl font-black text-ink tracking-tight flex items-center justify-center gap-2 md:gap-4">
+            Language
+            <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl overflow-hidden shadow-lg border-2 border-jade/20 bg-paper relative inline-block shrink-0">
+              <Image src="/logo.png" alt="LanguageHub Logo" fill className="object-cover" />
+            </div>
+            <span className="text-jade">Hub</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Master Asian languages with modern, structured, and interactive lessons. Your journey to fluency starts here.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
+          {/* Korean Path */}
+          <Link href="/korean" className="group relative p-8 border border-muted rounded-3xl bg-paper hover:border-jade hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 text-left flex flex-col justify-between h-[300px]">
+            <div className="space-y-4">
+              <div className="w-12 h-12 rounded-full bg-jade/10 text-jade flex items-center justify-center">
+                <span className="text-xl font-bold">한</span>
+              </div>
+              <h2 className="text-2xl font-bold text-ink group-hover:text-jade transition-colors">Korean</h2>
+              <p className="text-muted-foreground">Start with Mr. Kim's master plan. Learn Hangeul, grammar, and essential vocabulary.</p>
+            </div>
+            <div className="flex items-center text-jade font-medium">
+              Start Learning <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </Link>
+
+          {/* Chinese Path (Coming Soon) */}
+          <div className="relative p-8 border border-muted rounded-3xl bg-paper/50 opacity-60 text-left flex flex-col justify-between h-[300px]">
+            <div className="space-y-4">
+              <div className="w-12 h-12 rounded-full bg-crimson/10 text-crimson flex items-center justify-center">
+                <span className="text-xl font-bold">中</span>
+              </div>
+              <h2 className="text-2xl font-bold text-ink">Chinese</h2>
+              <p className="text-muted-foreground">Master Pinyin and essential Hanzi. (Coming Soon)</p>
+            </div>
+            <div className="flex items-center text-muted-foreground font-medium">
+              Coming Soon
+            </div>
+          </div>
+
+          {/* Japanese Path (Coming Soon) */}
+          <div className="relative p-8 border border-muted rounded-3xl bg-paper/50 opacity-60 text-left flex flex-col justify-between h-[300px]">
+            <div className="space-y-4">
+              <div className="w-12 h-12 rounded-full bg-gold/10 text-gold flex items-center justify-center">
+                <span className="text-xl font-bold">日</span>
+              </div>
+              <h2 className="text-2xl font-bold text-ink">Japanese</h2>
+              <p className="text-muted-foreground">Learn Hiragana, Katakana, and basic Kanji. (Coming Soon)</p>
+            </div>
+            <div className="flex items-center text-muted-foreground font-medium">
+              Coming Soon
+            </div>
+          </div>
         </div>
       </main>
     </div>

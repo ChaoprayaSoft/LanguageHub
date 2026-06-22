@@ -1,21 +1,40 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fdfcf8; /* Paper White */
+  --foreground: #1c1c1c; /* Ink Black */
+  --ink: #1c1c1c;
+  --paper: #fdfcf8;
+  --jade: #3b8256;
+  --crimson: #bc2b2b;
+  --gold: #d4af37;
+  --muted: #f0ede6;
+  --muted-foreground: #6b6b6b;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-jade: var(--jade);
+  --color-crimson: var(--crimson);
+  --color-gold: var(--gold);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #141414; /* Deep Charcoal */
+    --foreground: #fdfcf8; /* Paper White */
+    --paper: #1c1c1c; /* Dark Paper */
+    --ink: #fdfcf8; /* White Ink */
+    --muted: #2a2a2a;
+    --muted-foreground: #a3a3a3;
   }
 }
 
@@ -23,4 +42,20 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom Scrollbar for oriental vibe */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--muted-foreground);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink);
 }

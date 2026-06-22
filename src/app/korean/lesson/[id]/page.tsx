@@ -61,11 +61,14 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
               // Simple check for korean unicode block
               const hasKorean = /[가-힣ㄱ-ㅎㅏ-ㅣ]/.test(childrenText);
               
+              // Extract ONLY Korean characters for the audio player so it doesn't read Romanization
+              const koreanOnlyText = childrenText.match(/[가-힣ㄱ-ㅎㅏ-ㅣ]+/g)?.join(' ') || '';
+              
               return (
                 <td className="p-4 align-middle bg-paper" {...props}>
                   <div className="flex items-center gap-4">
                     <span className={hasKorean ? "font-bold text-xl text-jade" : ""}>{props.children}</span>
-                    {hasKorean && <AudioPlayerButton text={childrenText} lang="ko-KR" />}
+                    {hasKorean && <AudioPlayerButton text={koreanOnlyText} lang="ko-KR" />}
                   </div>
                 </td>
               );

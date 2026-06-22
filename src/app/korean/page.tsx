@@ -1,11 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { koreanData } from "@/data/korean";
 import { BookOpen, PenTool } from "lucide-react";
 
 export default function KoreanHub() {
+  const [activeTab, setActiveTab] = useState<"beginner" | "intermediate">("beginner");
+
   const scrollToLesson = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
@@ -13,8 +16,11 @@ export default function KoreanHub() {
     }
   };
 
+  const beginnerLessons = koreanData.lessons.slice(0, 9);
+  const intermediateLessons = koreanData.lessons.slice(9);
+
   return (
-    <div className="max-w-4xl mx-auto space-y-16">
+    <div className="max-w-4xl mx-auto space-y-12">
       <div className="text-center space-y-6 flex flex-col items-center">
         <h1 className="text-5xl font-black text-ink">Mr. Kim's Korean Class</h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -22,52 +28,155 @@ export default function KoreanHub() {
         </p>
       </div>
 
+      {/* Tabs */}
+      <div className="flex justify-center border-b border-muted">
+        <button
+          onClick={() => setActiveTab("beginner")}
+          className={`px-8 py-4 font-bold text-lg border-b-4 transition-colors ${
+            activeTab === "beginner" ? "border-jade text-jade" : "border-transparent text-muted-foreground hover:text-ink"
+          }`}
+        >
+          Beginner Level
+        </button>
+        <button
+          onClick={() => setActiveTab("intermediate")}
+          className={`px-8 py-4 font-bold text-lg border-b-4 transition-colors ${
+            activeTab === "intermediate" ? "border-jade text-jade" : "border-transparent text-muted-foreground hover:text-ink"
+          }`}
+        >
+          Intermediate Level
+        </button>
+      </div>
+
+      {/* Tab Content */}
       <div className="bg-paper border border-muted p-8 rounded-3xl space-y-8">
-        <h2 className="text-3xl font-bold text-ink border-b border-muted pb-4">The Master Plan</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <button onClick={() => scrollToLesson("lesson-1")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
-            <span className="text-jade font-bold block mb-1">Lesson 1</span>
-            <span className="text-ink font-medium">Hangeul (The Alphabet)</span>
-          </button>
-          <button onClick={() => scrollToLesson("lesson-2")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
-            <span className="text-jade font-bold block mb-1">Lesson 2</span>
-            <span className="text-ink font-medium">Greetings & Intro</span>
-          </button>
-          <button onClick={() => scrollToLesson("lesson-3")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
-            <span className="text-jade font-bold block mb-1">Lesson 3</span>
-            <span className="text-ink font-medium">Sentence Structure</span>
-          </button>
-          <button onClick={() => scrollToLesson("lesson-4")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
-            <span className="text-jade font-bold block mb-1">Lesson 4</span>
-            <span className="text-ink font-medium">Everyday Vocabulary</span>
-          </button>
-          <button onClick={() => scrollToLesson("lesson-5")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
-            <span className="text-jade font-bold block mb-1">Lesson 5</span>
-            <span className="text-ink font-medium">Action Verbs</span>
-          </button>
-          <button onClick={() => scrollToLesson("lesson-6")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
-            <span className="text-jade font-bold block mb-1">Lesson 6</span>
-            <span className="text-ink font-medium">Daily Routine</span>
-          </button>
-          <button onClick={() => scrollToLesson("lesson-7")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
-            <span className="text-jade font-bold block mb-1">Lesson 7</span>
-            <span className="text-ink font-medium">Location Particles</span>
-          </button>
-          <button onClick={() => scrollToLesson("lesson-8")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
-            <span className="text-jade font-bold block mb-1">Lesson 8</span>
-            <span className="text-ink font-medium">System Logic Vocab</span>
-          </button>
-          <button onClick={() => scrollToLesson("lesson-9")} className="p-4 rounded-xl bg-crimson/10 border-2 border-crimson/20 text-center hover:bg-crimson/20 hover:border-crimson transition-colors sm:col-span-2">
-            <span className="text-crimson font-black text-xl block mb-1">Final Exam</span>
-            <span className="text-ink font-medium">Test your knowledge!</span>
-          </button>
-        </div>
+        <h2 className="text-3xl font-bold text-ink border-b border-muted pb-4">
+          {activeTab === "beginner" ? "Beginner Level: The Master Plan" : "Intermediate Level: The Next Steps"}
+        </h2>
+        
+        {activeTab === "beginner" && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <button onClick={() => scrollToLesson("lesson-1")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 1</span>
+              <span className="text-ink font-medium">Hangeul (The Alphabet)</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-2")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 2</span>
+              <span className="text-ink font-medium">Greetings & Intro</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-3")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 3</span>
+              <span className="text-ink font-medium">Sentence Structure</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-4")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 4</span>
+              <span className="text-ink font-medium">Everyday Vocabulary</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-5")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 5</span>
+              <span className="text-ink font-medium">Action Verbs</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-6")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 6</span>
+              <span className="text-ink font-medium">Daily Routine</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-7")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 7</span>
+              <span className="text-ink font-medium">Location Particles</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-8")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 8</span>
+              <span className="text-ink font-medium">System Logic Vocab</span>
+            </button>
+            <button onClick={() => scrollToLesson("final-exam")} className="p-4 rounded-xl bg-crimson/10 border-2 border-crimson/20 text-center hover:bg-crimson/20 hover:border-crimson transition-colors sm:col-span-2">
+              <span className="text-crimson font-black text-xl block mb-1">Final Exam</span>
+              <span className="text-ink font-medium">Test your knowledge!</span>
+            </button>
+          </div>
+        )}
+
+        {activeTab === "intermediate" && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <button onClick={() => scrollToLesson("lesson-9")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 9</span>
+              <span className="text-ink font-medium">Everyday Polite Form</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-10")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 10</span>
+              <span className="text-ink font-medium">Platform & Transaction</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-11")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 11</span>
+              <span className="text-ink font-medium">The "IF" Condition</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-12")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 12</span>
+              <span className="text-ink font-medium">Numbers & Currencies</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-13")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 13</span>
+              <span className="text-ink font-medium">Developer's Toolkit</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-14")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 14</span>
+              <span className="text-ink font-medium">Target Particle (에)</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-15")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 15</span>
+              <span className="text-ink font-medium">Time Travel (Past Tense)</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-16")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 16</span>
+              <span className="text-ink font-medium">Multitasking (AND - 고)</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-17")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 17</span>
+              <span className="text-ink font-medium">Permissions (Can/Cannot)</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-18")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 18</span>
+              <span className="text-ink font-medium">Roadmap (Future Tense)</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-19")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 19</span>
+              <span className="text-ink font-medium">User Stories (Want to)</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-20")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 20</span>
+              <span className="text-ink font-medium">Cause & Effect (Because)</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-21")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 21</span>
+              <span className="text-ink font-medium">System Status (-ing)</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-22")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 22</span>
+              <span className="text-ink font-medium">Error States (Negation)</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-23")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 23</span>
+              <span className="text-ink font-medium">Requirements (Must/Have to)</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-24")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 24</span>
+              <span className="text-ink font-medium">Instructions (Try doing)</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-25")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 25</span>
+              <span className="text-ink font-medium">Data Operators (AND/OR)</span>
+            </button>
+            <button onClick={() => scrollToLesson("lesson-26")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
+              <span className="text-jade font-bold block mb-1">Lesson 26</span>
+              <span className="text-ink font-medium">Exception Handling (BUT)</span>
+            </button>
+          </div>
+        )}
       </div>
 
       <div id="lessons" className="space-y-6 pt-8 scroll-mt-20">
         <h2 className="text-3xl font-bold text-ink">Lessons</h2>
         <div className="grid gap-6">
-          {koreanData.lessons.map((lesson) => (
+          {(activeTab === "beginner" ? beginnerLessons : intermediateLessons).map((lesson) => (
             <div id={lesson.id} key={lesson.id} className="group p-6 border border-muted rounded-2xl bg-paper hover:shadow-lg transition-all flex flex-col sm:flex-row gap-6 justify-between items-start sm:items-center scroll-mt-6">
               <div>
                 <h3 className="text-xl font-bold text-ink group-hover:text-jade transition-colors mb-2">
@@ -76,7 +185,7 @@ export default function KoreanHub() {
                 <p className="text-muted-foreground">{lesson.description}</p>
               </div>
               <div className="flex gap-3 w-full sm:w-auto">
-                {lesson.id === "lesson-9" ? (
+                {lesson.id === "final-exam" ? (
                   <Link
                     href={`/korean/workbook/${lesson.id}`}
                     className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-crimson text-paper px-6 py-2 rounded-lg font-bold hover:bg-opacity-80 transition-colors whitespace-nowrap"

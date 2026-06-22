@@ -16,7 +16,7 @@ export default async function WorkbookPage({ params }: { params: Promise<{ id: s
   return (
     <div className="max-w-4xl mx-auto space-y-12">
       <div className="flex items-center gap-4 border-b border-muted pb-8">
-        <Link href={`/korean/lesson/${lesson.id}`} className="p-3 bg-paper rounded-full border border-muted hover:bg-muted text-ink transition-colors">
+        <Link href={lesson.id === "final-exam" ? "/korean" : `/korean/lesson/${lesson.id}`} className="p-3 bg-paper rounded-full border border-muted hover:bg-muted text-ink transition-colors">
           <ArrowLeft size={20} />
         </Link>
         <div>

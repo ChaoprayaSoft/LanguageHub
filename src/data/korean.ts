@@ -266,6 +266,116 @@ The standard order is now: **Subject + Location + Object + Verb**
 Congratulations, Khaopan! You have successfully completed the beginner Master Plan. You now know how to read the Korean alphabet, introduce yourself, express your daily actions, specify locations, and even discuss complex logical structures like loops and variables in a completely different language.
 
 Your homework from now on is to immerse yourself. Change your phone's language to Korean, write your daily to-do lists using the Subject-Location-Object-Verb format, and never stop building your vocabulary. Class dismissed!`
+    },
+    {
+      id: "lesson-9",
+      title: "Final Exam: Beginner Master Plan",
+      description: "Test your knowledge from Phase 1 to Phase 8.",
+      content: `Welcome to your Final Exam, Khaopan! I am very impressed that you did not just rush to the next level. A wise student knows that a strong foundation is the key to mastering any language.
+
+As your teacher, Mr. Kim, I have designed this test to evaluate everything we covered in Phase 1 through Phase 8. It will test your reading, grammar, vocabulary, and sentence-building skills.
+
+Grab a notebook and a pencil. Take your time, think about the rules, and do your best. The answer key is at the bottom, but no cheating!
+
+---
+
+## 📝 The Beginner Level Final Exam
+
+### Part 1: Vocabulary Matching
+
+*Draw a mental line between the Korean word and its English meaning.*
+
+1. 학교
+2. 오류
+3. 사과
+4. 변수
+5. 책
+
+A. Book
+B. School
+C. Variable
+D. Apple
+E. Error / Bug
+
+### Part 2: The Particle Puzzle
+
+*Fill in the blanks with the correct particle: **는/은** (Subject), **를/을** (Object), or **에서** (Location).*
+
+1. 저___ 학생입니다. (I am a student.)
+2. 저는 집___ 코딩합니다. (I code at home.)
+3. 선생님___ 프로그램을 만듭니다. (The teacher makes a program.)
+4. 저는 조건___ 수정합니다. (I fix the condition.)
+
+### Part 3: Verb Conjugation Station
+
+*Change these dictionary verbs into their Formal/Polite form (ending in **ㅂ니다** or **습니다**).*
+
+1. 먹다 (to eat) ➔ ____________
+2. 자다 (to sleep) ➔ ____________
+3. 실행하다 (to run/execute) ➔ ____________
+4. 만들다 (to make - *Hint: remember the special rule!*) ➔ ____________
+
+### Part 4: Sentence Construction
+
+*Translate the following English sentences into Korean using the Subject + Location + Object + Verb structure.*
+
+1. I read a book.
+2. I study computers at school.
+3. I fix the error in the room.
+
+### Part 5: Reading Comprehension
+
+*Read the short Korean passage below aloud to practice your pronunciation, then translate it into English.*
+
+> 안녕하세요!
+> 저는 카오판입니다. 저는 학생입니다.
+> 저는 방에서 컴퓨터를 공부합니다.
+> 저는 코드를 실행합니다. 감사합니다!
+
+---
+
+---
+
+## 🗝️ Answer Key (Do not look until you are finished!)
+
+**Part 1: Vocabulary Matching**
+
+1. B (School)
+2. E (Error / Bug)
+3. D (Apple)
+4. C (Variable)
+5. A (Book)
+
+**Part 2: The Particle Puzzle**
+
+1. **는** (저는 - *Ends in vowel*)
+2. **에서** (집에서 - *Location marker*)
+3. **은** (선생님은 - *Ends in consonant*)
+4. **을** (조건을 - *Ends in consonant*)
+
+**Part 3: Verb Conjugation Station**
+
+1. **먹습니다** (Ends in consonant)
+2. **잡니다** (Ends in vowel)
+3. **실행합니다** (Ends in vowel)
+4. **만듭니다** (The 'ㄹ' drops out before adding the polite ending)
+
+**Part 4: Sentence Construction**
+
+1. 저는 책을 읽습니다. (jeo-neun chaek-eul ik-seum-ni-da.)
+2. 저는 학교에서 컴퓨터를 공부합니다. (jeo-neun hak-gyo-e-seo keom-pyu-teo-reul gong-bu-ham-ni-da.)
+3. 저는 방에서 오류를 수정합니다. (jeo-neun bang-e-seo o-ryu-reul su-jeong-ham-ni-da.)
+
+**Part 5: Reading Comprehension Translation**
+
+> Hello!
+> I am Khaopan. I am a student.
+> I study computers in the room.
+> I run the code. Thank you!
+
+---
+
+Grade yourself honestly, Khaopan. If you scored 80% or higher, you have officially graduated from Mr. Kim's Beginner Class. Take a deep breath, celebrate your hard work, and prepare yourself mentally for the next level!`
     }
   ],
   workbooks: {
@@ -430,6 +540,132 @@ Your homework from now on is to immerse yourself. Change your phone's language t
         options: ["저는 집에서 프로그램을 실행합니다.", "저는 학교에서 코드를 만듭니다.", "저는 집에서 오류를 수정합니다.", "저는 프로그램을 공부합니다."],
         correctAnswer: "저는 집에서 프로그램을 실행합니다.",
         explanation: "집에서 (at home) 프로그램을 (program) 실행합니다 (run)."
+      }
+    ],
+    "lesson-9": [
+      {
+        question: "Part 1: What does 학교 mean?",
+        type: "multiple-choice",
+        options: ["School", "Error / Bug", "Apple", "Variable", "Book"],
+        correctAnswer: "School",
+        explanation: "학교 (hak-gyo) means School."
+      },
+      {
+        question: "Part 1: What does 오류 mean?",
+        type: "multiple-choice",
+        options: ["School", "Error / Bug", "Apple", "Variable", "Book"],
+        correctAnswer: "Error / Bug",
+        explanation: "오류 (o-ryu) means Error or Bug."
+      },
+      {
+        question: "Part 1: What does 사과 mean?",
+        type: "multiple-choice",
+        options: ["School", "Error / Bug", "Apple", "Variable", "Book"],
+        correctAnswer: "Apple",
+        explanation: "사과 (sa-gwa) means Apple."
+      },
+      {
+        question: "Part 1: What does 변수 mean?",
+        type: "multiple-choice",
+        options: ["School", "Error / Bug", "Apple", "Variable", "Book"],
+        correctAnswer: "Variable",
+        explanation: "변수 (byeon-su) means Variable."
+      },
+      {
+        question: "Part 1: What does 책 mean?",
+        type: "multiple-choice",
+        options: ["School", "Error / Bug", "Apple", "Variable", "Book"],
+        correctAnswer: "Book",
+        explanation: "책 (chaek) means Book."
+      },
+      {
+        question: "Part 2: Fill in the blank: 저___ 학생입니다. (I am a student.)",
+        type: "multiple-choice",
+        options: ["는", "은", "를", "에서"],
+        correctAnswer: "는",
+        explanation: "저는 (Ends in vowel)."
+      },
+      {
+        question: "Part 2: Fill in the blank: 저는 집___ 코딩합니다. (I code at home.)",
+        type: "multiple-choice",
+        options: ["는", "은", "를", "에서"],
+        correctAnswer: "에서",
+        explanation: "집에서 (Location marker)."
+      },
+      {
+        question: "Part 2: Fill in the blank: 선생님___ 프로그램을 만듭니다. (The teacher makes a program.)",
+        type: "multiple-choice",
+        options: ["는", "은", "를", "에서"],
+        correctAnswer: "은",
+        explanation: "선생님은 (Ends in consonant)."
+      },
+      {
+        question: "Part 2: Fill in the blank: 저는 조건___ 수정합니다. (I fix the condition.)",
+        type: "multiple-choice",
+        options: ["는", "은", "를", "을"],
+        correctAnswer: "을",
+        explanation: "조건을 (Ends in consonant, object marker)."
+      },
+      {
+        question: "Part 3: Change '먹다' (to eat) to Formal/Polite form:",
+        type: "multiple-choice",
+        options: ["먹니다", "먹습니다", "먹읍니다", "먹어요"],
+        correctAnswer: "먹습니다",
+        explanation: "먹다 ends in a consonant, so we add 습니다."
+      },
+      {
+        question: "Part 3: Change '자다' (to sleep) to Formal/Polite form:",
+        type: "multiple-choice",
+        options: ["자습니다", "자요", "잡니다", "잡다"],
+        correctAnswer: "잡니다",
+        explanation: "자다 ends in a vowel, so we add ㅂ니다."
+      },
+      {
+        question: "Part 3: Change '실행하다' (to run/execute) to Formal/Polite form:",
+        type: "multiple-choice",
+        options: ["실행습니다", "실행해요", "실행합니다", "실행합다"],
+        correctAnswer: "실행합니다",
+        explanation: "실행하다 ends in a vowel, so we add ㅂ니다."
+      },
+      {
+        question: "Part 3: Change '만들다' (to make) to Formal/Polite form:",
+        type: "multiple-choice",
+        options: ["만들습니다", "만들니다", "만듭다", "만듭니다"],
+        correctAnswer: "만듭니다",
+        explanation: "Special rule! The 'ㄹ' drops out before adding the polite ending ㅂ니다."
+      },
+      {
+        question: "Part 4: Translate 'I read a book.'",
+        type: "multiple-choice",
+        options: ["저는 책을 읽습니다.", "저는 책을 만듭니다.", "책을 저는 읽습니다.", "저는 사과를 먹습니다."],
+        correctAnswer: "저는 책을 읽습니다.",
+        explanation: "저는 (I) 책을 (book) 읽습니다 (read)."
+      },
+      {
+        question: "Part 4: Translate 'I study computers at school.'",
+        type: "multiple-choice",
+        options: ["저는 학교에서 컴퓨터를 공부합니다.", "저는 집에서 컴퓨터를 공부합니다.", "학교에서 저는 컴퓨터를 공부합니다.", "저는 학교를 컴퓨터에서 공부합니다."],
+        correctAnswer: "저는 학교에서 컴퓨터를 공부합니다.",
+        explanation: "저는 (I) 학교에서 (at school) 컴퓨터를 (computers) 공부합니다 (study)."
+      },
+      {
+        question: "Part 4: Translate 'I fix the error in the room.'",
+        type: "multiple-choice",
+        options: ["저는 방에서 오류를 수정합니다.", "저는 방에서 조건을 수정합니다.", "저는 집에서 오류를 수정합니다.", "저는 방을 오류에서 수정합니다."],
+        correctAnswer: "저는 방에서 오류를 수정합니다.",
+        explanation: "저는 (I) 방에서 (in the room) 오류를 (error) 수정합니다 (fix)."
+      },
+      {
+        question: "Part 5: Translate the passage: '안녕하세요! 저는 카오판입니다. 저는 학생입니다. 저는 방에서 컴퓨터를 공부합니다. 저는 코드를 실행합니다. 감사합니다!'",
+        type: "multiple-choice",
+        options: [
+          "Hello! I am Khaopan. I am a student. I study computers in the room. I run the code. Thank you!",
+          "Hello! I am Khaopan. I am a teacher. I study computers in the room. I run the code. Thank you!",
+          "Hello! I am Khaopan. I am a student. I code at home. I fix the error. Thank you!",
+          "Hello! I am Khaopan. I am a student. I study computers at school. I run the code. Thank you!"
+        ],
+        correctAnswer: "Hello! I am Khaopan. I am a student. I study computers in the room. I run the code. Thank you!",
+        explanation: "방에서 (in the room), 컴퓨터를 공부합니다 (study computers), 코드를 실행합니다 (run the code)."
       }
     ]
   }

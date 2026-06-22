@@ -26,36 +26,40 @@ export default function KoreanHub() {
         <h2 className="text-3xl font-bold text-ink border-b border-muted pb-4">The Master Plan</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <button onClick={() => scrollToLesson("lesson-1")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
-            <span className="text-jade font-bold block mb-1">Phase 1</span>
+            <span className="text-jade font-bold block mb-1">Lesson 1</span>
             <span className="text-ink font-medium">Hangeul (The Alphabet)</span>
           </button>
           <button onClick={() => scrollToLesson("lesson-2")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
-            <span className="text-jade font-bold block mb-1">Phase 2</span>
+            <span className="text-jade font-bold block mb-1">Lesson 2</span>
             <span className="text-ink font-medium">Greetings & Intro</span>
           </button>
           <button onClick={() => scrollToLesson("lesson-3")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
-            <span className="text-jade font-bold block mb-1">Phase 3</span>
+            <span className="text-jade font-bold block mb-1">Lesson 3</span>
             <span className="text-ink font-medium">Sentence Structure</span>
           </button>
           <button onClick={() => scrollToLesson("lesson-4")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
-            <span className="text-jade font-bold block mb-1">Phase 4</span>
+            <span className="text-jade font-bold block mb-1">Lesson 4</span>
             <span className="text-ink font-medium">Everyday Vocabulary</span>
           </button>
           <button onClick={() => scrollToLesson("lesson-5")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
-            <span className="text-jade font-bold block mb-1">Phase 5</span>
+            <span className="text-jade font-bold block mb-1">Lesson 5</span>
             <span className="text-ink font-medium">Action Verbs</span>
           </button>
           <button onClick={() => scrollToLesson("lesson-6")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
-            <span className="text-jade font-bold block mb-1">Phase 6</span>
+            <span className="text-jade font-bold block mb-1">Lesson 6</span>
             <span className="text-ink font-medium">Daily Routine</span>
           </button>
           <button onClick={() => scrollToLesson("lesson-7")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
-            <span className="text-jade font-bold block mb-1">Phase 7</span>
+            <span className="text-jade font-bold block mb-1">Lesson 7</span>
             <span className="text-ink font-medium">Location Particles</span>
           </button>
           <button onClick={() => scrollToLesson("lesson-8")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
-            <span className="text-jade font-bold block mb-1">Phase 8</span>
+            <span className="text-jade font-bold block mb-1">Lesson 8</span>
             <span className="text-ink font-medium">System Logic Vocab</span>
+          </button>
+          <button onClick={() => scrollToLesson("lesson-9")} className="p-4 rounded-xl bg-crimson/10 border-2 border-crimson/20 text-center hover:bg-crimson/20 hover:border-crimson transition-colors sm:col-span-2">
+            <span className="text-crimson font-black text-xl block mb-1">Final Exam</span>
+            <span className="text-ink font-medium">Test your knowledge!</span>
           </button>
         </div>
       </div>
@@ -72,18 +76,29 @@ export default function KoreanHub() {
                 <p className="text-muted-foreground">{lesson.description}</p>
               </div>
               <div className="flex gap-3 w-full sm:w-auto">
-                <Link
-                  href={`/korean/lesson/${lesson.id}`}
-                  className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-ink text-paper px-4 py-2 rounded-lg font-medium hover:bg-opacity-80 transition-colors whitespace-nowrap"
-                >
-                  <BookOpen size={18} /> Lesson
-                </Link>
-                <Link
-                  href={`/korean/workbook/${lesson.id}`}
-                  className="flex-1 sm:flex-none flex items-center justify-center gap-2 border-2 border-ink text-ink px-4 py-2 rounded-lg font-medium hover:bg-ink hover:text-paper transition-colors whitespace-nowrap"
-                >
-                  <PenTool size={18} /> Workbook
-                </Link>
+                {lesson.id === "lesson-9" ? (
+                  <Link
+                    href={`/korean/workbook/${lesson.id}`}
+                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-crimson text-paper px-6 py-2 rounded-lg font-bold hover:bg-opacity-80 transition-colors whitespace-nowrap"
+                  >
+                    <PenTool size={18} /> Take Exam
+                  </Link>
+                ) : (
+                  <>
+                    <Link
+                      href={`/korean/lesson/${lesson.id}`}
+                      className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-ink text-paper px-4 py-2 rounded-lg font-medium hover:bg-opacity-80 transition-colors whitespace-nowrap"
+                    >
+                      <BookOpen size={18} /> Lesson
+                    </Link>
+                    <Link
+                      href={`/korean/workbook/${lesson.id}`}
+                      className="flex-1 sm:flex-none flex items-center justify-center gap-2 border-2 border-ink text-ink px-4 py-2 rounded-lg font-medium hover:bg-ink hover:text-paper transition-colors whitespace-nowrap"
+                    >
+                      <PenTool size={18} /> Workbook
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           ))}

@@ -20,19 +20,19 @@ export default function KoreanHub() {
   const intermediateLessons = koreanData.lessons.slice(9);
 
   return (
-    <div className="max-w-4xl mx-auto space-y-12">
-      <div className="text-center space-y-6 flex flex-col items-center">
-        <h1 className="text-5xl font-black text-ink">Mr. Kim's Korean Class</h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+    <div className="max-w-4xl mx-auto space-y-8 md:space-y-12 px-4 md:px-0">
+      <div className="text-center space-y-4 md:space-y-6 flex flex-col items-center">
+        <h1 className="text-4xl md:text-5xl font-black text-ink">Mr. Kim's Korean Class</h1>
+        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
           Welcome to my class! Learning a new language is a fantastic decision. Korean is incredibly logical and highly structured. We are going to start from absolute zero and build your skills step by step.
         </p>
       </div>
 
       {/* Tabs */}
-      <div className="flex justify-center border-b border-muted">
+      <div className="flex justify-center border-b border-muted overflow-x-auto whitespace-nowrap hide-scrollbar">
         <button
           onClick={() => setActiveTab("beginner")}
-          className={`px-8 py-4 font-bold text-lg border-b-4 transition-colors ${
+          className={`px-6 md:px-8 py-3 md:py-4 font-bold text-base md:text-lg border-b-4 transition-colors flex-shrink-0 ${
             activeTab === "beginner" ? "border-jade text-jade" : "border-transparent text-muted-foreground hover:text-ink"
           }`}
         >
@@ -40,7 +40,7 @@ export default function KoreanHub() {
         </button>
         <button
           onClick={() => setActiveTab("intermediate")}
-          className={`px-8 py-4 font-bold text-lg border-b-4 transition-colors ${
+          className={`px-6 md:px-8 py-3 md:py-4 font-bold text-base md:text-lg border-b-4 transition-colors flex-shrink-0 ${
             activeTab === "intermediate" ? "border-jade text-jade" : "border-transparent text-muted-foreground hover:text-ink"
           }`}
         >
@@ -49,8 +49,8 @@ export default function KoreanHub() {
       </div>
 
       {/* Tab Content */}
-      <div className="bg-paper border border-muted p-8 rounded-3xl space-y-8">
-        <h2 className="text-3xl font-bold text-ink border-b border-muted pb-4">
+      <div className="bg-paper border border-muted p-4 sm:p-8 rounded-3xl space-y-6 sm:space-y-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-ink border-b border-muted pb-4">
           {activeTab === "beginner" ? "Beginner Level: The Master Plan" : "Intermediate Level: The Next Steps"}
         </h2>
         
@@ -174,17 +174,17 @@ export default function KoreanHub() {
       </div>
 
       <div id="lessons" className="space-y-6 pt-8 scroll-mt-20">
-        <h2 className="text-3xl font-bold text-ink">Lessons</h2>
-        <div className="grid gap-6">
+        <h2 className="text-2xl sm:text-3xl font-bold text-ink">Lessons</h2>
+        <div className="grid gap-4 sm:gap-6">
           {(activeTab === "beginner" ? beginnerLessons : intermediateLessons).map((lesson) => (
-            <div id={lesson.id} key={lesson.id} className="group p-6 border border-muted rounded-2xl bg-paper hover:shadow-lg transition-all flex flex-col sm:flex-row gap-6 justify-between items-start sm:items-center scroll-mt-6">
-              <div>
-                <h3 className="text-xl font-bold text-ink group-hover:text-jade transition-colors mb-2">
+            <div id={lesson.id} key={lesson.id} className="group p-5 sm:p-6 border border-muted rounded-2xl bg-paper hover:shadow-lg transition-all flex flex-col sm:flex-row gap-4 sm:gap-6 justify-between items-start sm:items-center scroll-mt-6">
+              <div className="w-full">
+                <h3 className="text-lg sm:text-xl font-bold text-ink group-hover:text-jade transition-colors mb-1 sm:mb-2">
                   {lesson.title}
                 </h3>
-                <p className="text-muted-foreground">{lesson.description}</p>
+                <p className="text-sm sm:text-base text-muted-foreground">{lesson.description}</p>
               </div>
-              <div className="flex gap-3 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                 {lesson.id === "final-exam" ? (
                   <Link
                     href={`/korean/workbook/${lesson.id}`}

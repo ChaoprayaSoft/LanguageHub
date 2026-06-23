@@ -17,25 +17,25 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
   // A simple hack to wrap korean text inside the table with an audio button
   // We can customize the table cell rendering
   return (
-    <div className="max-w-3xl mx-auto space-y-12">
-      <div className="flex items-center gap-4 border-b border-muted pb-8">
-        <Link href="/korean" className="p-3 bg-paper rounded-full border border-muted hover:bg-muted text-ink transition-colors">
+    <div className="max-w-3xl mx-auto space-y-8 md:space-y-12 px-4 md:px-0">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 border-b border-muted pb-6 md:pb-8">
+        <Link href="/korean" className="p-3 bg-paper rounded-full border border-muted hover:bg-muted text-ink transition-colors self-start sm:self-auto">
           <ArrowLeft size={20} />
         </Link>
         <div>
-          <h1 className="text-4xl font-black text-ink">{lesson.title}</h1>
-          <p className="text-muted-foreground mt-2">{lesson.description}</p>
+          <h1 className="text-3xl sm:text-4xl font-black text-ink">{lesson.title}</h1>
+          <p className="text-sm sm:text-base text-muted-foreground mt-2">{lesson.description}</p>
         </div>
       </div>
 
-      <div className="prose prose-lg max-w-none text-ink
-        prose-headings:text-ink prose-headings:font-bold prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
+      <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none text-ink
+        prose-headings:text-ink prose-headings:font-bold prose-h3:text-xl sm:prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
         prose-p:text-muted-foreground prose-p:leading-relaxed
         prose-strong:text-ink
         prose-ul:list-disc prose-ul:pl-6 prose-li:text-muted-foreground
         prose-table:w-full prose-table:border-collapse prose-table:my-8
-        prose-th:bg-muted/50 prose-th:p-4 prose-th:text-left prose-th:font-bold prose-th:border prose-th:border-muted
-        prose-td:p-4 prose-td:border prose-td:border-muted prose-td:bg-paper"
+        prose-th:bg-muted/50 prose-th:p-3 sm:prose-th:p-4 prose-th:text-left prose-th:font-bold prose-th:border prose-th:border-muted
+        prose-td:p-3 sm:prose-td:p-4 prose-td:border prose-td:border-muted prose-td:bg-paper"
       >
         <ReactMarkdown 
           remarkPlugins={[remarkGfm]}
@@ -79,13 +79,13 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
         </ReactMarkdown>
       </div>
 
-      <div className="pt-12 border-t border-muted flex justify-between items-center">
-        <Link href="/korean" className="text-muted-foreground hover:text-ink font-medium">
+      <div className="pt-8 md:pt-12 border-t border-muted flex flex-col sm:flex-row justify-between items-center gap-6">
+        <Link href="/korean" className="text-muted-foreground hover:text-ink font-medium order-2 sm:order-1">
           Back to Hub
         </Link>
         <Link 
           href={`/korean/workbook/${lesson.id}`}
-          className="bg-ink text-paper px-6 py-3 rounded-full flex items-center gap-2 hover:bg-jade transition-colors font-medium"
+          className="w-full sm:w-auto bg-ink text-paper px-6 py-4 sm:py-3 rounded-full flex items-center justify-center gap-2 hover:bg-jade transition-colors font-medium order-1 sm:order-2"
         >
           Go to Workbook <ArrowRight size={20} />
         </Link>

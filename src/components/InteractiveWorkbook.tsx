@@ -69,13 +69,13 @@ export default function InteractiveWorkbook({ lessonId, questions }: Interactive
         animate={{ opacity: 1, y: 0 }}
         className="max-w-2xl mx-auto p-8 border border-muted rounded-2xl bg-paper shadow-lg text-center"
       >
-        <h2 className="text-3xl font-bold text-ink mb-4">Workbook Complete!</h2>
-        <p className="text-xl text-muted-foreground mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-ink mb-4">Workbook Complete!</h2>
+        <p className="text-lg sm:text-xl text-muted-foreground mb-8">
           You scored <span className="text-jade font-bold">{score}</span> out of {questions.length}
         </p>
         <Link
           href="/korean"
-          className="inline-flex items-center gap-2 bg-ink text-paper px-6 py-3 rounded-full hover:bg-jade transition-colors"
+          className="inline-flex items-center justify-center w-full sm:w-auto gap-2 bg-ink text-paper px-6 py-4 sm:py-3 rounded-full hover:bg-jade transition-colors"
         >
           Back to Lessons <ArrowRight size={20} />
         </Link>
@@ -84,12 +84,12 @@ export default function InteractiveWorkbook({ lessonId, questions }: Interactive
   }
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <div className="mb-8 flex justify-between items-center">
+    <div className="max-w-2xl mx-auto w-full px-4 sm:px-0">
+      <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <span className="text-sm font-medium text-muted-foreground">
           Question {currentQuestionIdx + 1} of {questions.length}
         </span>
-        <div className="flex gap-1">
+        <div className="flex gap-1 flex-wrap w-full sm:w-auto">
           {questions.map((_, idx) => (
             <div
               key={idx}
@@ -110,9 +110,9 @@ export default function InteractiveWorkbook({ lessonId, questions }: Interactive
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -20 }}
-        className="p-8 border border-muted rounded-2xl bg-paper shadow-sm"
+        className="p-5 sm:p-8 border border-muted rounded-2xl bg-paper shadow-sm"
       >
-        <h3 className="text-2xl font-bold text-ink mb-6">{currentQuestion.question}</h3>
+        <h3 className="text-xl sm:text-2xl font-bold text-ink mb-6">{currentQuestion.question}</h3>
 
         <div className="grid gap-3">
           {currentQuestion.options.map((option, idx) => {
@@ -135,7 +135,7 @@ export default function InteractiveWorkbook({ lessonId, questions }: Interactive
                 key={idx}
                 onClick={() => handleOptionClick(option)}
                 disabled={isAnswered}
-                className={`w-full text-left p-4 rounded-xl border-2 transition-all font-medium text-lg flex justify-between items-center ${btnClass}`}
+                className={`w-full text-left p-4 min-h-[56px] rounded-xl border-2 transition-all font-medium text-base sm:text-lg flex justify-between items-center ${btnClass}`}
               >
                 {option}
                 {isAnswered && isCorrect && <CheckCircle size={24} className="text-jade" />}
@@ -162,7 +162,7 @@ export default function InteractiveWorkbook({ lessonId, questions }: Interactive
           <div className="mt-8 flex justify-end">
             <button
               onClick={nextQuestion}
-              className="bg-ink text-paper px-6 py-3 rounded-full flex items-center gap-2 hover:bg-opacity-80 transition-all font-medium"
+              className="bg-ink w-full sm:w-auto text-paper px-6 py-4 sm:py-3 rounded-full flex items-center justify-center gap-2 hover:bg-opacity-80 transition-all font-medium"
             >
               {currentQuestionIdx < questions.length - 1 ? "Next Question" : "Finish Workbook"}
               <ArrowRight size={20} />

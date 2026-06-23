@@ -29,9 +29,15 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <div className="flex-1">{children}</div>
-        <footer className="w-full border-t border-muted bg-paper text-center py-6 text-sm text-muted-foreground mt-auto">
-          <p>
-            © 2026 ChaoprayaSoft, THAILAND | Contact : tiawongsombat@gmail.com | Tel : 0909739266 | LinID : yok_tiaw
+        <footer className="w-full border-t border-muted bg-paper text-center py-6 px-4 text-sm text-muted-foreground mt-auto">
+          <p className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
+            <span>© 2026 ChaoprayaSoft, THAILAND</span>
+            <span className="hidden sm:inline">|</span>
+            <span>Contact: tiawongsombat@gmail.com</span>
+            <span className="hidden sm:inline">|</span>
+            <span>Tel: 0909739266</span>
+            <span className="hidden sm:inline">|</span>
+            <span>LineID: yok_tiaw</span>
           </p>
         </footer>
       </body>

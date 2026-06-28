@@ -13,8 +13,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://language-hub-two.vercel.app"),
   title: "LanguageHub by PPYN",
   description: "Learn Asian languages with an interactive modern approach.",
+  keywords: ["language hub", "Language learning", "Learn Korean", "Interactive learning"],
+  authors: [{ name: "ChaoprayaSoft" }, { name: "PPYN" }],
+  creator: "ChaoprayaSoft",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://language-hub-two.vercel.app",
+    title: "LanguageHub by PPYN",
+    description: "Learn Asian languages with an interactive modern approach.",
+    siteName: "LanguageHub",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "LanguageHub by PPYN",
+    description: "Learn Asian languages with an interactive modern approach.",
+  },
 };
 
 export default function RootLayout({

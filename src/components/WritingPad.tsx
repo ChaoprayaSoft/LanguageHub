@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import { ReactSketchCanvas, ReactSketchCanvasRef } from "react-sketch-canvas";
-import Tesseract from "tesseract.js";
+import { createWorker, PSM } from "tesseract.js";
 import { Volume2 } from "lucide-react";
 
 interface WritingPadProps {
@@ -25,22 +25,65 @@ export default function WritingPad({ targetCharacter, meaning, onSuccess }: Writ
     setScore(null);
 
     try {
-      // Export as PNG with a solid white background (needed for good OCR)
       const dataUri = await canvasRef.current.exportImage("png");
 
-      // Run Tesseract
-      const { data } = await Tesseract.recognize(
-        dataUri,
-        "kor", // Korean language pack
-        { logger: (m) => console.log(m) }
-      );
+      // Load BOTH Korean and English. 
+      // Why? Tesseract with ONLY Korean tries to force single strokes into complex Korean letters and fails.
+      // With English loaded, it will confidently see "ㄱ" as "7" or "r", and "ㄴ" as "L", 
+      // which our confusion matrix will correctly identify!
+      const worker = await createWorker(["kor", "eng"], 1, {
+        logger: (m) => console.log(m)
+      });
+      
+      await worker.setParameters({
+        tessedit_pageseg_mode: targetCharacter.length === 1 ? PSM.SINGLE_CHAR : PSM.SINGLE_BLOCK,
+      });
 
-      // Clean up the text
+      const { data } = await worker.recognize(dataUri);
+      await worker.terminate();
+
       const recognizedText = data.text.trim().replace(/\s+/g, "");
       setResult(recognizedText);
 
-      // Check if it matches the target
-      if (recognizedText.includes(targetCharacter)) {
+      // Confusion matrix for single characters
+      const jamoConfusions: Record<string, string[]> = {
+        "ㄱ": ["7", "r", "n", "기", "구", "그", "7", "ㄱ"],
+        "ㄴ": ["l", "L", "c", "u", "니", "느", "L", "v", "ㄴ"],
+        "ㄷ": ["c", "C", "t", "디", "드", "C", "E", "ㄷ"],
+        "ㄹ": ["2", "z", "Z", "리", "르", "S", "5", "ㄹ"],
+        "ㅁ": ["a", "ㅁ", "미", "므", "0", "o", "O", "q", "p", "D", "B"],
+        "ㅂ": ["H", "h", "u", "비", "브", "A", "U", "ㅂ"],
+        "ㅅ": ["^", "A", "시", "스", "h", "n", "ㅅ"],
+        "ㅇ": ["o", "O", "0", "이", "으", "Q", "c", "C", "ㅇ"],
+        "ㅈ": ["x", "z", "지", "즈", "7", "Z", "x", "ㅈ"],
+        "ㅊ": ["*", "x", "치", "츠", "t", "X", "ㅊ"],
+        "ㅋ": ["7", "F", "키", "크", "z", "E", "k", "ㅋ"],
+        "ㅌ": ["E", "t", "티", "트", "F", "C", "ㅌ"],
+        "ㅍ": ["II", "pi", "피", "프", "I", "T", "H", "ㅍ"],
+        "ㅎ": ["o", "호", "히", "흐", "하", "s", "S", "5", "ㅎ"],
+        
+        "ㅏ": ["t", "1", "|", "f", "r", "I", "l", "i", "ㅏ"],
+        "ㅑ": ["k", "F", "t", "E", "ㅑ"],
+        "ㅓ": ["1", "t", "j", "i", "l", "I", "ㅓ"],
+        "ㅕ": ["t", "1", "E", "f", "k", "ㅕ"],
+        "ㅗ": ["l", "1", "t", "ㅗ", "-", "T"],
+        "ㅛ": ["l", "1", "u", "ㅛ", "T", "Y"],
+        "ㅜ": ["T", "t", "ㅜ", "r", "+"],
+        "ㅠ": ["TT", "ㅠ", "T", "H"],
+        "ㅡ": ["-", "_", "ㅡ", "=", "~"],
+        "ㅣ": ["l", "1", "I", "|", "ㅣ", "i", "!"]
+      };
+
+      let isCorrect = recognizedText.includes(targetCharacter);
+      
+      if (!isCorrect && targetCharacter.length === 1) {
+        const allowedConfusions = jamoConfusions[targetCharacter] || [];
+        isCorrect = allowedConfusions.some(confusion => 
+          recognizedText.toLowerCase().includes(confusion.toLowerCase())
+        );
+      }
+
+      if (isCorrect) {
         setScore(100);
         if (onSuccess) onSuccess();
       } else {
@@ -128,16 +171,27 @@ export default function WritingPad({ targetCharacter, meaning, onSuccess }: Writ
         >
           Undo
         </button>
-        <button 
-          onClick={checkWriting}
-          disabled={isRecognizing}
-          className="w-full sm:flex-[2] px-6 py-3 bg-jade text-white font-bold rounded-xl hover:bg-opacity-90 transition-colors disabled:opacity-50 shadow-md"
-        >
-          {isRecognizing ? "Checking..." : "Check Writing"}
-        </button>
+        
+        {targetCharacter.length > 1 && (
+          <button 
+            onClick={checkWriting}
+            disabled={isRecognizing}
+            className="w-full sm:flex-[2] px-6 py-3 bg-jade text-white font-bold rounded-xl hover:bg-opacity-90 transition-colors disabled:opacity-50 shadow-md"
+          >
+            {isRecognizing ? "Checking..." : "Check Writing"}
+          </button>
+        )}
       </div>
 
-      {result !== null && (
+      {targetCharacter.length === 1 && (
+        <div className="w-full max-w-sm text-center pt-2">
+          <p className="text-sm text-muted-foreground">
+            Free practice mode. Use the buttons below to change letters!
+          </p>
+        </div>
+      )}
+
+      {targetCharacter.length > 1 && result !== null && (
         <div className={`w-full max-w-sm p-4 rounded-xl border-2 animate-in fade-in slide-in-from-bottom-4 ${score === 100 ? "bg-green-50 border-green-500 text-green-900" : "bg-red-50 border-red-400 text-red-900"}`}>
           {score === 100 ? (
             <div className="flex flex-col items-center text-center">

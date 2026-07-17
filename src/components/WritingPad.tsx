@@ -122,6 +122,11 @@ export default function WritingPad({ targetCharacter, meaning, onSuccess }: Writ
     }
   };
 
+  // Check if the target is a single standalone consonant or vowel (Jamo)
+  // These are inherently bad for OCR, so we disable checking for them.
+  // One-syllable words like "집" (House) are full blocks and should be checked.
+  const isFreePracticeMode = targetCharacter.length === 1 && /^[ㄱ-ㅎㅏ-ㅣ]$/.test(targetCharacter);
+
   return (
     <div className="flex flex-col items-center space-y-6 w-full p-2 sm:p-4">
       <div className="text-center w-full px-2">
@@ -153,7 +158,7 @@ export default function WritingPad({ targetCharacter, meaning, onSuccess }: Writ
           ref={canvasRef}
           style={{ width: "100%", height: "300px" }}
           strokeWidth={12}
-          strokeColor="#0f172a" // Dark ink
+          strokeColor="#0f172a"
           canvasColor="#ffffff"
         />
       </div>
@@ -172,7 +177,7 @@ export default function WritingPad({ targetCharacter, meaning, onSuccess }: Writ
           Undo
         </button>
         
-        {targetCharacter.length > 1 && (
+        {!isFreePracticeMode && (
           <button 
             onClick={checkWriting}
             disabled={isRecognizing}
@@ -183,7 +188,7 @@ export default function WritingPad({ targetCharacter, meaning, onSuccess }: Writ
         )}
       </div>
 
-      {targetCharacter.length === 1 && (
+      {isFreePracticeMode && (
         <div className="w-full max-w-sm text-center pt-2">
           <p className="text-sm text-muted-foreground">
             Free practice mode. Use the buttons below to change letters!
@@ -191,7 +196,7 @@ export default function WritingPad({ targetCharacter, meaning, onSuccess }: Writ
         </div>
       )}
 
-      {targetCharacter.length > 1 && result !== null && (
+      {!isFreePracticeMode && result !== null && (
         <div className={`w-full max-w-sm p-4 rounded-xl border-2 animate-in fade-in slide-in-from-bottom-4 ${score === 100 ? "bg-green-50 border-green-500 text-green-900" : "bg-red-50 border-red-400 text-red-900"}`}>
           {score === 100 ? (
             <div className="flex flex-col items-center text-center">

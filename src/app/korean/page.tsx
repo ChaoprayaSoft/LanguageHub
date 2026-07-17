@@ -97,10 +97,10 @@ export default function KoreanHub() {
       </div>
 
       {/* Tabs */}
-      <div className="flex justify-center border-b border-muted overflow-x-auto whitespace-nowrap hide-scrollbar">
+      <div className="flex justify-start md:justify-center border-b border-muted overflow-x-auto whitespace-nowrap hide-scrollbar w-full px-2 md:px-0">
         <button
           onClick={() => setActiveTab("practice")}
-          className={`px-6 md:px-8 py-3 md:py-4 font-bold text-base md:text-lg border-b-4 transition-colors flex-shrink-0 ${
+          className={`px-4 md:px-8 py-3 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-colors flex-shrink-0 ${
             activeTab === "practice" ? "border-jade text-jade" : "border-transparent text-muted-foreground hover:text-ink"
           }`}
         >
@@ -108,7 +108,7 @@ export default function KoreanHub() {
         </button>
         <button
           onClick={() => setActiveTab("beginner")}
-          className={`px-6 md:px-8 py-3 md:py-4 font-bold text-base md:text-lg border-b-4 transition-colors flex-shrink-0 ${
+          className={`px-4 md:px-8 py-3 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-colors flex-shrink-0 ${
             activeTab === "beginner" ? "border-jade text-jade" : "border-transparent text-muted-foreground hover:text-ink"
           }`}
         >
@@ -116,7 +116,7 @@ export default function KoreanHub() {
         </button>
         <button
           onClick={() => setActiveTab("intermediate")}
-          className={`px-6 md:px-8 py-3 md:py-4 font-bold text-base md:text-lg border-b-4 transition-colors flex-shrink-0 ${
+          className={`px-4 md:px-8 py-3 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-colors flex-shrink-0 ${
             activeTab === "intermediate" ? "border-jade text-jade" : "border-transparent text-muted-foreground hover:text-ink"
           }`}
         >
@@ -131,18 +131,25 @@ export default function KoreanHub() {
             {activeTab === "practice" ? "Writing Practice" : activeTab === "beginner" ? "Beginner Level: The Master Plan" : "Intermediate Level: The Next Steps"}
           </h2>
           {activeTab === "practice" && (
-            <select 
-              value={activeSetId} 
-              onChange={(e) => {
-                setActiveSetId(e.target.value);
-                setPracticeCharIndex(0);
-              }}
-              className="bg-muted text-ink font-bold px-4 py-2 rounded-xl outline-none focus:ring-2 focus:ring-jade border-r-[16px] border-transparent"
-            >
-              {practiceSets.map(set => (
-                <option key={set.id} value={set.id}>{set.name}</option>
-              ))}
-            </select>
+            <div className="relative w-full sm:w-auto">
+              <select 
+                value={activeSetId} 
+                onChange={(e) => {
+                  setActiveSetId(e.target.value);
+                  setPracticeCharIndex(0);
+                }}
+                className="w-full sm:w-auto appearance-none bg-paper border-2 border-muted text-ink font-bold px-4 py-2 pr-10 rounded-xl outline-none focus:ring-2 focus:ring-jade focus:border-jade hover:border-jade transition-colors cursor-pointer"
+              >
+                {practiceSets.map(set => (
+                  <option key={set.id} value={set.id}>{set.name}</option>
+                ))}
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-ink">
+                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                </svg>
+              </div>
+            </div>
           )}
         </div>
         

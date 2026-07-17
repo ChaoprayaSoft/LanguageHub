@@ -5,9 +5,77 @@ import Link from "next/link";
 import Image from "next/image";
 import { koreanData } from "@/data/korean";
 import { BookOpen, PenTool } from "lucide-react";
+import WritingPad from "@/components/WritingPad";
+
+export type PracticeItem = { char: string; meaning?: string };
+
+const practiceSets: { id: string; name: string; items: PracticeItem[] }[] = [
+  { 
+    id: "consonants", 
+    name: "Basic Consonants", 
+    items: [
+      { char: "ㄱ" }, { char: "ㄴ" }, { char: "ㄷ" }, { char: "ㄹ" }, { char: "ㅁ" }, 
+      { char: "ㅂ" }, { char: "ㅅ" }, { char: "ㅇ" }, { char: "ㅈ" }, { char: "ㅊ" }, 
+      { char: "ㅋ" }, { char: "ㅌ" }, { char: "ㅍ" }, { char: "ㅎ" }
+    ] 
+  },
+  { 
+    id: "vowels", 
+    name: "Basic Vowels", 
+    items: [
+      { char: "ㅏ" }, { char: "ㅑ" }, { char: "ㅓ" }, { char: "ㅕ" }, { char: "ㅗ" }, 
+      { char: "ㅛ" }, { char: "ㅜ" }, { char: "ㅠ" }, { char: "ㅡ" }, { char: "ㅣ" }
+    ] 
+  },
+  { 
+    id: "words", 
+    name: "Common Words", 
+    items: [
+      { char: "안녕", meaning: "Hello / Peace" }, 
+      { char: "감사", meaning: "Gratitude / Thanks" }, 
+      { char: "사랑", meaning: "Love" }, 
+      { char: "친구", meaning: "Friend" }, 
+      { char: "가족", meaning: "Family" }, 
+      { char: "학교", meaning: "School" },
+      { char: "집", meaning: "House / Home" },
+      { char: "물", meaning: "Water" },
+      { char: "밥", meaning: "Rice / Meal" },
+      { char: "차", meaning: "Tea / Car" },
+      { char: "눈", meaning: "Eye / Snow" },
+      { char: "코", meaning: "Nose" },
+      { char: "입", meaning: "Mouth" },
+      { char: "귀", meaning: "Ear" },
+      { char: "오늘", meaning: "Today" },
+      { char: "내일", meaning: "Tomorrow" },
+      { char: "시간", meaning: "Time" },
+      { char: "사람", meaning: "Person" },
+      { char: "마음", meaning: "Heart / Mind" }
+    ] 
+  },
+  { 
+    id: "sentences", 
+    name: "Useful Phrases", 
+    items: [
+      { char: "안녕하세요", meaning: "Hello (Polite)" }, 
+      { char: "감사합니다", meaning: "Thank you (Polite)" }, 
+      { char: "미안해요", meaning: "I'm sorry" }, 
+      { char: "잘 지내요?", meaning: "How are you?" },
+      { char: "이름이 뭐예요?", meaning: "What is your name?" },
+      { char: "만나서 반가워요", meaning: "Nice to meet you" },
+      { char: "얼마예요?", meaning: "How much is it?" },
+      { char: "화장실이 어디예요?", meaning: "Where is the bathroom?" },
+      { char: "주세요", meaning: "Please give me" }
+    ] 
+  },
+];
 
 export default function KoreanHub() {
-  const [activeTab, setActiveTab] = useState<"beginner" | "intermediate">("beginner");
+  const [activeTab, setActiveTab] = useState<"practice" | "beginner" | "intermediate">("practice");
+  const [activeSetId, setActiveSetId] = useState(practiceSets[0].id);
+  const [practiceCharIndex, setPracticeCharIndex] = useState(0);
+
+  const activeSet = practiceSets.find(s => s.id === activeSetId) || practiceSets[0];
+  const practiceChars = activeSet.items;
 
   const scrollToLesson = (id: string) => {
     const el = document.getElementById(id);
@@ -31,6 +99,14 @@ export default function KoreanHub() {
       {/* Tabs */}
       <div className="flex justify-center border-b border-muted overflow-x-auto whitespace-nowrap hide-scrollbar">
         <button
+          onClick={() => setActiveTab("practice")}
+          className={`px-6 md:px-8 py-3 md:py-4 font-bold text-base md:text-lg border-b-4 transition-colors flex-shrink-0 ${
+            activeTab === "practice" ? "border-jade text-jade" : "border-transparent text-muted-foreground hover:text-ink"
+          }`}
+        >
+          Writing Practice
+        </button>
+        <button
           onClick={() => setActiveTab("beginner")}
           className={`px-6 md:px-8 py-3 md:py-4 font-bold text-base md:text-lg border-b-4 transition-colors flex-shrink-0 ${
             activeTab === "beginner" ? "border-jade text-jade" : "border-transparent text-muted-foreground hover:text-ink"
@@ -50,10 +126,57 @@ export default function KoreanHub() {
 
       {/* Tab Content */}
       <div className="bg-paper border border-muted p-4 sm:p-8 rounded-3xl space-y-6 sm:space-y-8">
-        <h2 className="text-2xl sm:text-3xl font-bold text-ink border-b border-muted pb-4">
-          {activeTab === "beginner" ? "Beginner Level: The Master Plan" : "Intermediate Level: The Next Steps"}
-        </h2>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-muted pb-4 gap-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-ink">
+            {activeTab === "practice" ? "Writing Practice" : activeTab === "beginner" ? "Beginner Level: The Master Plan" : "Intermediate Level: The Next Steps"}
+          </h2>
+          {activeTab === "practice" && (
+            <select 
+              value={activeSetId} 
+              onChange={(e) => {
+                setActiveSetId(e.target.value);
+                setPracticeCharIndex(0);
+              }}
+              className="bg-muted text-ink font-bold px-4 py-2 rounded-xl outline-none focus:ring-2 focus:ring-jade border-r-[16px] border-transparent"
+            >
+              {practiceSets.map(set => (
+                <option key={set.id} value={set.id}>{set.name}</option>
+              ))}
+            </select>
+          )}
+        </div>
         
+        {activeTab === "practice" && (
+          <div className="flex flex-col items-center justify-center space-y-8 py-4">
+            <WritingPad 
+              key={`${activeSetId}-${practiceCharIndex}`} // Force remount if target changes rapidly
+              targetCharacter={practiceChars[practiceCharIndex].char} 
+              meaning={practiceChars[practiceCharIndex].meaning}
+              onSuccess={() => {
+                if (practiceCharIndex < practiceChars.length - 1) {
+                  setTimeout(() => setPracticeCharIndex(i => i + 1), 2000);
+                }
+              }} 
+            />
+            
+            <div className="flex flex-wrap justify-center gap-2">
+              {practiceChars.map((item, idx) => (
+                <button
+                  key={item.char}
+                  onClick={() => setPracticeCharIndex(idx)}
+                  className={`px-4 h-12 min-w-12 rounded-xl font-bold text-lg sm:text-xl transition-colors whitespace-nowrap ${
+                    idx === practiceCharIndex 
+                      ? "bg-jade text-white" 
+                      : "bg-muted text-ink hover:bg-muted-foreground/20"
+                  }`}
+                >
+                  {item.char}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         {activeTab === "beginner" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <button onClick={() => scrollToLesson("lesson-1")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
@@ -173,11 +296,12 @@ export default function KoreanHub() {
         )}
       </div>
 
-      <div id="lessons" className="space-y-6 pt-8 scroll-mt-20">
-        <h2 className="text-2xl sm:text-3xl font-bold text-ink">Lessons</h2>
-        <div className="grid gap-4 sm:gap-6">
-          {(activeTab === "beginner" ? beginnerLessons : intermediateLessons).map((lesson) => (
-            <div id={lesson.id} key={lesson.id} className="group p-5 sm:p-6 border border-muted rounded-2xl bg-paper hover:shadow-lg transition-all flex flex-col sm:flex-row gap-4 sm:gap-6 justify-between items-start sm:items-center scroll-mt-6">
+      {activeTab !== "practice" && (
+        <div id="lessons" className="space-y-6 pt-8 scroll-mt-20">
+          <h2 className="text-2xl sm:text-3xl font-bold text-ink">Lessons</h2>
+          <div className="grid gap-4 sm:gap-6">
+            {(activeTab === "beginner" ? beginnerLessons : intermediateLessons).map((lesson) => (
+              <div id={lesson.id} key={lesson.id} className="group p-5 sm:p-6 border border-muted rounded-2xl bg-paper hover:shadow-lg transition-all flex flex-col sm:flex-row gap-4 sm:gap-6 justify-between items-start sm:items-center scroll-mt-6">
               <div className="w-full">
                 <h3 className="text-lg sm:text-xl font-bold text-ink group-hover:text-jade transition-colors mb-1 sm:mb-2">
                   {lesson.title}
@@ -208,11 +332,12 @@ export default function KoreanHub() {
                     </Link>
                   </>
                 )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

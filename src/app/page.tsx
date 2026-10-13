@@ -47,9 +47,7 @@ export default function Home() {
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-crimson/10 text-crimson flex items-center justify-center">
                   <span className="text-lg sm:text-xl font-bold">中</span>
                 </div>
-                <span className="text-xs bg-crimson/10 text-crimson font-bold px-2 py-0.5 rounded-full border border-crimson/20">
-                  Phase 1 &amp; 2
-                </span>
+
               </div>
               <h2 className="text-xl sm:text-2xl font-bold text-ink group-hover:text-crimson transition-colors">Chinese</h2>
               <p className="text-sm sm:text-base text-muted-foreground">Start with Mr. Wei&apos;s class. Master Pinyin, four tones, and core S-V-O sentences.</p>

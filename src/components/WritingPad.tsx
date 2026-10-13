@@ -8,10 +8,20 @@ import { Volume2 } from "lucide-react";
 interface WritingPadProps {
   targetCharacter: string;
   meaning?: string;
+  pinyin?: string;
   onSuccess?: () => void;
+  lang?: "ko-KR" | "zh-CN";
+  accentColor?: "jade" | "crimson";
 }
 
-export default function WritingPad({ targetCharacter, meaning, onSuccess }: WritingPadProps) {
+export default function WritingPad({ 
+  targetCharacter, 
+  meaning, 
+  pinyin,
+  onSuccess,
+  lang = "ko-KR",
+  accentColor = "jade"
+}: WritingPadProps) {
   const canvasRef = useRef<ReactSketchCanvasRef>(null);
   const [isRecognizing, setIsRecognizing] = useState(false);
   const [result, setResult] = useState<string | null>(null);
@@ -27,11 +37,8 @@ export default function WritingPad({ targetCharacter, meaning, onSuccess }: Writ
     try {
       const dataUri = await canvasRef.current.exportImage("png");
 
-      // Load BOTH Korean and English. 
-      // Why? Tesseract with ONLY Korean tries to force single strokes into complex Korean letters and fails.
-      // With English loaded, it will confidently see "ㄱ" as "7" or "r", and "ㄴ" as "L", 
-      // which our confusion matrix will correctly identify!
-      const worker = await createWorker(["kor", "eng"], 1, {
+      const ocrLangs = lang === "zh-CN" ? ["chi_sim", "eng"] : ["kor", "eng"];
+      const worker = await createWorker(ocrLangs, 1, {
         logger: (m) => console.log(m)
       });
       
@@ -45,7 +52,7 @@ export default function WritingPad({ targetCharacter, meaning, onSuccess }: Writ
       const recognizedText = data.text.trim().replace(/\s+/g, "");
       setResult(recognizedText);
 
-      // Confusion matrix for single characters
+      // Confusion matrix for Korean single characters
       const jamoConfusions: Record<string, string[]> = {
         "ㄱ": ["7", "r", "n", "기", "구", "그", "7", "ㄱ"],
         "ㄴ": ["l", "L", "c", "u", "니", "느", "L", "v", "ㄴ"],
@@ -74,10 +81,28 @@ export default function WritingPad({ targetCharacter, meaning, onSuccess }: Writ
         "ㅣ": ["l", "1", "I", "|", "ㅣ", "i", "!"]
       };
 
+      // Confusion matrix for Chinese single characters (strokes & ideographs)
+      const hanziConfusions: Record<string, string[]> = {
+        "一": ["一", "-", "—", "1", "_", "一"],
+        "二": ["二", "=", "2"],
+        "三": ["三", "3"],
+        "十": ["十", "+", "t", "T", "10"],
+        "人": ["人", "入", "八", "r"],
+        "八": ["八", "人", "8"],
+        "口": ["口", "0", "o", "O", "D"],
+        "日": ["日", "8", "B", "曰"],
+        "大": ["大", "太", "犬"],
+        "水": ["水", "冰"],
+        "妈": ["妈", "媽", "女马"],
+        "马": ["马", "馬"]
+      };
+
       let isCorrect = recognizedText.includes(targetCharacter);
       
       if (!isCorrect && targetCharacter.length === 1) {
-        const allowedConfusions = jamoConfusions[targetCharacter] || [];
+        const allowedConfusions = lang === "zh-CN" 
+          ? (hanziConfusions[targetCharacter] || []) 
+          : (jamoConfusions[targetCharacter] || []);
         isCorrect = allowedConfusions.some(confusion => 
           recognizedText.toLowerCase().includes(confusion.toLowerCase())
         );
@@ -117,32 +142,47 @@ export default function WritingPad({ targetCharacter, meaning, onSuccess }: Writ
   const playAudio = () => {
     if ("speechSynthesis" in window) {
       const utterance = new SpeechSynthesisUtterance(targetCharacter);
-      utterance.lang = "ko-KR"; // Set language to Korean
+      utterance.lang = lang;
+      utterance.rate = 0.8;
       window.speechSynthesis.speak(utterance);
     }
   };
 
-  // Check if the target is a single standalone consonant or vowel (Jamo)
-  // These are inherently bad for OCR, so we disable checking for them.
-  // One-syllable words like "집" (House) are full blocks and should be checked.
-  const isFreePracticeMode = targetCharacter.length === 1 && /^[ㄱ-ㅎㅏ-ㅣ]$/.test(targetCharacter);
+  const isFreePracticeMode = lang === "ko-KR" 
+    && targetCharacter.length === 1 
+    && /^[ㄱ-ㅎㅏ-ㅣ]$/.test(targetCharacter);
+
+  const primaryBtnClass = accentColor === "crimson" 
+    ? "bg-crimson hover:bg-opacity-90" 
+    : "bg-jade hover:bg-opacity-90";
+
+  const hoverAudioClass = accentColor === "crimson" 
+    ? "hover:bg-crimson" 
+    : "hover:bg-jade";
+
+  const meaningTextClass = accentColor === "crimson" 
+    ? "text-crimson" 
+    : "text-jade";
 
   return (
     <div className="flex flex-col items-center space-y-6 w-full p-2 sm:p-4">
       <div className="text-center w-full px-2">
         <h3 className="text-lg text-muted-foreground font-medium">Practice writing:</h3>
         <div className="flex items-center justify-center gap-3 sm:gap-4 mt-2">
-          <p className="text-3xl sm:text-5xl font-black text-ink break-keep leading-tight">{targetCharacter}</p>
+          <p className="text-4xl sm:text-6xl font-black text-ink break-keep leading-tight">{targetCharacter}</p>
           <button 
             onClick={playAudio}
-            className="p-3 bg-muted text-ink rounded-full hover:bg-jade hover:text-white transition-colors"
+            className={`p-3 bg-muted text-ink rounded-full ${hoverAudioClass} hover:text-white transition-colors`}
             title="Listen to pronunciation"
           >
             <Volume2 size={24} />
           </button>
         </div>
+        {pinyin && (
+          <p className="text-lg font-bold text-muted-foreground mt-1 tracking-wide">{pinyin}</p>
+        )}
         {meaning && (
-          <p className="text-xl font-medium text-jade mt-2">{meaning}</p>
+          <p className={`text-xl font-medium ${meaningTextClass} mt-1`}>{meaning}</p>
         )}
       </div>
 
@@ -181,7 +221,7 @@ export default function WritingPad({ targetCharacter, meaning, onSuccess }: Writ
           <button 
             onClick={checkWriting}
             disabled={isRecognizing}
-            className="w-full sm:flex-[2] px-6 py-3 bg-jade text-white font-bold rounded-xl hover:bg-opacity-90 transition-colors disabled:opacity-50 shadow-md"
+            className={`w-full sm:flex-[2] px-6 py-3 ${primaryBtnClass} text-white font-bold rounded-xl transition-colors disabled:opacity-50 shadow-md`}
           >
             {isRecognizing ? "Checking..." : "Check Writing"}
           </button>

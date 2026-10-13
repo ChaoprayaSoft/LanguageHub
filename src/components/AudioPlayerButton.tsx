@@ -7,9 +7,10 @@ import { motion } from "framer-motion";
 interface AudioPlayerButtonProps {
   text: string;
   lang?: string;
+  accentColor?: "jade" | "crimson";
 }
 
-export default function AudioPlayerButton({ text, lang = "ko-KR" }: AudioPlayerButtonProps) {
+export default function AudioPlayerButton({ text, lang = "ko-KR", accentColor = "jade" }: AudioPlayerButtonProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const playAudio = () => {
@@ -30,13 +31,15 @@ export default function AudioPlayerButton({ text, lang = "ko-KR" }: AudioPlayerB
     window.speechSynthesis.speak(utterance);
   };
 
+  const activeBg = accentColor === "crimson" ? "bg-crimson text-paper" : "bg-jade text-paper";
+
   return (
     <motion.button
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       onClick={playAudio}
       className={`p-2 rounded-full flex items-center justify-center transition-colors ${
-        isPlaying ? "bg-jade text-paper" : "bg-muted text-ink hover:bg-ink hover:text-paper"
+        isPlaying ? activeBg : "bg-muted text-ink hover:bg-ink hover:text-paper"
       }`}
       title="Listen to pronunciation"
     >

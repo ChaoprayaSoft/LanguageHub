@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, BookOpen, Globe } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function Home() {
   return (
@@ -33,26 +33,31 @@ export default function Home() {
                 <span className="text-lg sm:text-xl font-bold">한</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-bold text-ink group-hover:text-jade transition-colors">Korean</h2>
-              <p className="text-sm sm:text-base text-muted-foreground">Start with Mr. Kim's master plan. Learn Hangeul, grammar, and essential vocabulary.</p>
+              <p className="text-sm sm:text-base text-muted-foreground">Start with Mr. Kim&apos;s master plan. Learn Hangeul, grammar, and essential vocabulary.</p>
             </div>
             <div className="flex items-center text-jade font-medium text-sm sm:text-base">
               Start Learning <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
             </div>
           </Link>
 
-          {/* Chinese Path (Coming Soon) */}
-          <div className="relative p-6 sm:p-8 border border-muted rounded-3xl bg-paper/50 opacity-60 text-left flex flex-col justify-between h-[250px] sm:h-[300px]">
+          {/* Chinese Path (Active Phase 1 & 2) */}
+          <Link href="/chinese" className="group relative p-6 sm:p-8 border border-muted rounded-3xl bg-paper hover:border-crimson hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 text-left flex flex-col justify-between h-[250px] sm:h-[300px]">
             <div className="space-y-3 sm:space-y-4">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-crimson/10 text-crimson flex items-center justify-center">
-                <span className="text-lg sm:text-xl font-bold">中</span>
+              <div className="flex items-center justify-between">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-crimson/10 text-crimson flex items-center justify-center">
+                  <span className="text-lg sm:text-xl font-bold">中</span>
+                </div>
+                <span className="text-xs bg-crimson/10 text-crimson font-bold px-2 py-0.5 rounded-full border border-crimson/20">
+                  Phase 1 &amp; 2
+                </span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold text-ink">Chinese</h2>
-              <p className="text-sm sm:text-base text-muted-foreground">Master Pinyin and essential Hanzi. (Coming Soon)</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-ink group-hover:text-crimson transition-colors">Chinese</h2>
+              <p className="text-sm sm:text-base text-muted-foreground">Start with Mr. Wei&apos;s class. Master Pinyin, four tones, and core S-V-O sentences.</p>
             </div>
-            <div className="flex items-center text-muted-foreground font-medium text-sm sm:text-base">
-              Coming Soon
+            <div className="flex items-center text-crimson font-medium text-sm sm:text-base">
+              Start Learning <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
             </div>
-          </div>
+          </Link>
 
           {/* Japanese Path (Coming Soon) */}
           <div className="relative p-6 sm:p-8 border border-muted rounded-3xl bg-paper/50 opacity-60 text-left flex flex-col justify-between h-[250px] sm:h-[300px]">

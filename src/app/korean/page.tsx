@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { koreanData } from "@/data/korean";
 import { BookOpen, PenTool } from "lucide-react";
 import WritingPad from "@/components/WritingPad";
@@ -90,7 +89,7 @@ export default function KoreanHub() {
   return (
     <div className="max-w-4xl mx-auto space-y-8 md:space-y-12 px-4 md:px-0">
       <div className="text-center space-y-4 md:space-y-6 flex flex-col items-center">
-        <h1 className="text-4xl md:text-5xl font-black text-ink">Mr. Kim's Korean Class</h1>
+        <h1 className="text-4xl md:text-5xl font-black text-ink">Mr. Kim&apos;s Korean Class</h1>
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
           Welcome to my class! Learning a new language is a fantastic decision. Korean is incredibly logical and highly structured. We are going to start from absolute zero and build your skills step by step.
         </p>
@@ -237,7 +236,7 @@ export default function KoreanHub() {
             </button>
             <button onClick={() => scrollToLesson("lesson-11")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
               <span className="text-jade font-bold block mb-1">Lesson 11</span>
-              <span className="text-ink font-medium">The "IF" Condition</span>
+              <span className="text-ink font-medium">The &quot;IF&quot; Condition</span>
             </button>
             <button onClick={() => scrollToLesson("lesson-12")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
               <span className="text-jade font-bold block mb-1">Lesson 12</span>
@@ -245,7 +244,7 @@ export default function KoreanHub() {
             </button>
             <button onClick={() => scrollToLesson("lesson-13")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
               <span className="text-jade font-bold block mb-1">Lesson 13</span>
-              <span className="text-ink font-medium">Developer's Toolkit</span>
+              <span className="text-ink font-medium">Developer&apos;s Toolkit</span>
             </button>
             <button onClick={() => scrollToLesson("lesson-14")} className="p-4 rounded-xl bg-muted/50 border border-muted text-left hover:bg-jade/10 hover:border-jade transition-colors">
               <span className="text-jade font-bold block mb-1">Lesson 14</span>

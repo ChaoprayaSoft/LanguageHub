@@ -6,6 +6,12 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import AudioPlayerButton from "@/components/AudioPlayerButton";
 
+interface HastNode {
+  type: string;
+  value?: string;
+  children?: HastNode[];
+}
+
 export default async function LessonPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
   const lesson = koreanData.lessons.find((l) => l.id === resolvedParams.id);
@@ -40,23 +46,24 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
         <ReactMarkdown 
           remarkPlugins={[remarkGfm]}
           components={{
-            table: ({node, ...props}) => (
+            table: ({ ...props }) => (
               <div className="overflow-x-auto my-8 border border-muted rounded-xl shadow-sm">
                 <table className="w-full border-collapse text-left" {...props} />
               </div>
             ),
-            thead: ({node, ...props}) => <thead className="bg-muted text-ink" {...props} />,
-            th: ({node, ...props}) => <th className="p-4 font-bold border-b border-muted whitespace-nowrap" {...props} />,
-            tr: ({node, ...props}) => <tr className="border-b border-muted last:border-0 hover:bg-muted/30 transition-colors" {...props} />,
+            thead: ({ ...props }) => <thead className="bg-muted text-ink" {...props} />,
+            th: ({ ...props }) => <th className="p-4 font-bold border-b border-muted whitespace-nowrap" {...props} />,
+            tr: ({ ...props }) => <tr className="border-b border-muted last:border-0 hover:bg-muted/30 transition-colors" {...props} />,
             td: ({ node, ...props }) => {
               // Helper to extract text from hast node
-              const getText = (n: any): string => {
-                if (n.type === 'text') return n.value;
+              const getText = (n: HastNode | undefined): string => {
+                if (!n) return '';
+                if (n.type === 'text' && n.value) return n.value;
                 if (n.children) return n.children.map(getText).join('');
                 return '';
               };
               
-              const childrenText = node ? getText(node) : '';
+              const childrenText = node ? getText(node as HastNode) : '';
               
               // Simple check for korean unicode block
               const hasKorean = /[가-힣ㄱ-ㅎㅏ-ㅣ]/.test(childrenText);

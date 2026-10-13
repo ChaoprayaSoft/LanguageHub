@@ -16,9 +16,16 @@ interface Question {
 interface InteractiveWorkbookProps {
   lessonId: string;
   questions: Question[];
+  backUrl?: string;
+  accentColor?: "jade" | "crimson";
 }
 
-export default function InteractiveWorkbook({ lessonId, questions }: InteractiveWorkbookProps) {
+export default function InteractiveWorkbook({ 
+  lessonId, 
+  questions, 
+  backUrl = "/korean", 
+  accentColor = "jade" 
+}: InteractiveWorkbookProps) {
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
@@ -71,11 +78,11 @@ export default function InteractiveWorkbook({ lessonId, questions }: Interactive
       >
         <h2 className="text-2xl sm:text-3xl font-bold text-ink mb-4">Workbook Complete!</h2>
         <p className="text-lg sm:text-xl text-muted-foreground mb-8">
-          You scored <span className="text-jade font-bold">{score}</span> out of {questions.length}
+          You scored <span className={`font-bold ${accentColor === "crimson" ? "text-crimson" : "text-jade"}`}>{score}</span> out of {questions.length}
         </p>
         <Link
-          href="/korean"
-          className="inline-flex items-center justify-center w-full sm:w-auto gap-2 bg-ink text-paper px-6 py-4 sm:py-3 rounded-full hover:bg-jade transition-colors"
+          href={backUrl}
+          className={`inline-flex items-center justify-center w-full sm:w-auto gap-2 bg-ink text-paper px-6 py-4 sm:py-3 rounded-full ${accentColor === "crimson" ? "hover:bg-crimson" : "hover:bg-jade"} transition-colors`}
         >
           Back to Lessons <ArrowRight size={20} />
         </Link>
@@ -97,7 +104,7 @@ export default function InteractiveWorkbook({ lessonId, questions }: Interactive
                 idx === currentQuestionIdx
                   ? "bg-ink"
                   : idx < currentQuestionIdx
-                  ? "bg-jade"
+                  ? (accentColor === "crimson" ? "bg-crimson" : "bg-jade")
                   : "bg-muted"
               }`}
             />

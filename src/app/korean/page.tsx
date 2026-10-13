@@ -95,32 +95,66 @@ export default function KoreanHub() {
         </p>
       </div>
 
-      {/* Tabs */}
-      <div className="flex justify-start md:justify-center border-b border-muted overflow-x-auto whitespace-nowrap hide-scrollbar w-full px-2 md:px-0">
-        <button
-          onClick={() => setActiveTab("practice")}
-          className={`px-4 md:px-8 py-3 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-colors flex-shrink-0 ${
-            activeTab === "practice" ? "border-jade text-jade" : "border-transparent text-muted-foreground hover:text-ink"
-          }`}
-        >
-          Writing Practice
-        </button>
-        <button
-          onClick={() => setActiveTab("beginner")}
-          className={`px-4 md:px-8 py-3 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-colors flex-shrink-0 ${
-            activeTab === "beginner" ? "border-jade text-jade" : "border-transparent text-muted-foreground hover:text-ink"
-          }`}
-        >
-          Beginner Level
-        </button>
-        <button
-          onClick={() => setActiveTab("intermediate")}
-          className={`px-4 md:px-8 py-3 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-colors flex-shrink-0 ${
-            activeTab === "intermediate" ? "border-jade text-jade" : "border-transparent text-muted-foreground hover:text-ink"
-          }`}
-        >
-          Intermediate Level
-        </button>
+      {/* Redesigned Segmented Navigation Tabs */}
+      <div className="bg-muted/40 p-1.5 sm:p-2 rounded-2xl sm:rounded-3xl border border-muted/80 shadow-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full">
+          {/* Tab 1: Writing Practice */}
+          <button
+            type="button"
+            onClick={() => setActiveTab("practice")}
+            className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-200 flex items-center justify-center gap-3 text-center cursor-pointer ${
+              activeTab === "practice" 
+                ? "bg-paper text-jade font-black shadow-md border border-jade/30 scale-[1.01]" 
+                : "text-muted-foreground hover:text-ink hover:bg-paper/60 font-semibold"
+            }`}
+          >
+            <span className="w-8 h-8 rounded-full bg-jade/10 text-jade flex items-center justify-center font-serif text-sm font-bold shrink-0">
+              글
+            </span>
+            <div className="flex flex-col items-start sm:items-center text-left sm:text-center leading-tight">
+              <span className="text-sm sm:text-base font-bold">Writing Practice</span>
+              <span className="text-xs opacity-75 font-normal">한글 쓰기 · Stroke Pad</span>
+            </div>
+          </button>
+
+          {/* Tab 2: Beginner */}
+          <button
+            type="button"
+            onClick={() => setActiveTab("beginner")}
+            className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-200 flex items-center justify-center gap-3 text-center cursor-pointer ${
+              activeTab === "beginner" 
+                ? "bg-paper text-jade font-black shadow-md border border-jade/30 scale-[1.01]" 
+                : "text-muted-foreground hover:text-ink hover:bg-paper/60 font-semibold"
+            }`}
+          >
+            <span className="w-8 h-8 rounded-full bg-jade/10 text-jade flex items-center justify-center font-serif text-sm font-bold shrink-0">
+              초
+            </span>
+            <div className="flex flex-col items-start sm:items-center text-left sm:text-center leading-tight">
+              <span className="text-sm sm:text-base font-bold">Beginner Level</span>
+              <span className="text-xs opacity-75 font-normal">Lessons 1–8 · Master Plan</span>
+            </div>
+          </button>
+
+          {/* Tab 3: Intermediate */}
+          <button
+            type="button"
+            onClick={() => setActiveTab("intermediate")}
+            className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-200 flex items-center justify-center gap-3 text-center cursor-pointer ${
+              activeTab === "intermediate" 
+                ? "bg-paper text-jade font-black shadow-md border border-jade/30 scale-[1.01]" 
+                : "text-muted-foreground hover:text-ink hover:bg-paper/60 font-semibold"
+            }`}
+          >
+            <span className="w-8 h-8 rounded-full bg-jade/10 text-jade flex items-center justify-center font-serif text-sm font-bold shrink-0">
+              중
+            </span>
+            <div className="flex flex-col items-start sm:items-center text-left sm:text-center leading-tight">
+              <span className="text-sm sm:text-base font-bold">Intermediate Level</span>
+              <span className="text-xs opacity-75 font-normal">Lessons 9–26 · Deep Grammar</span>
+            </div>
+          </button>
+        </div>
       </div>
 
       {/* Tab Content */}

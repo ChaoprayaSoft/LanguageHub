@@ -104,38 +104,66 @@ export default function ChineseHub() {
         </p>
       </div>
 
-      {/* Tabs */}
-      <div className="flex justify-start md:justify-center border-b border-muted overflow-x-auto whitespace-nowrap hide-scrollbar w-full px-2 md:px-0">
-        <button
-          onClick={() => setActiveTab("practice")}
-          className={`px-4 md:px-8 py-3 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-colors flex-shrink-0 ${
-            activeTab === "practice" 
-              ? "border-crimson text-crimson" 
-              : "border-transparent text-muted-foreground hover:text-ink"
-          }`}
-        >
-          Writing Practice (汉字书写)
-        </button>
-        <button
-          onClick={() => setActiveTab("phase1")}
-          className={`px-4 md:px-8 py-3 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-colors flex-shrink-0 ${
-            activeTab === "phase1" 
-              ? "border-crimson text-crimson" 
-              : "border-transparent text-muted-foreground hover:text-ink"
-          }`}
-        >
-          Phase 1: Pronunciation Engine
-        </button>
-        <button
-          onClick={() => setActiveTab("phase2")}
-          className={`px-4 md:px-8 py-3 md:py-4 font-bold text-sm md:text-lg border-b-4 transition-colors flex-shrink-0 ${
-            activeTab === "phase2" 
-              ? "border-crimson text-crimson" 
-              : "border-transparent text-muted-foreground hover:text-ink"
-          }`}
-        >
-          Phase 2: Core Sentence Structure
-        </button>
+      {/* Redesigned Oriental Segmented Navigation Tabs */}
+      <div className="bg-muted/40 p-1.5 sm:p-2 rounded-2xl sm:rounded-3xl border border-muted/80 shadow-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full">
+          {/* Tab 1: Writing Practice */}
+          <button
+            type="button"
+            onClick={() => setActiveTab("practice")}
+            className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-200 flex items-center justify-center gap-3 text-center cursor-pointer ${
+              activeTab === "practice" 
+                ? "bg-paper text-crimson font-black shadow-md border border-crimson/30 scale-[1.01]" 
+                : "text-muted-foreground hover:text-ink hover:bg-paper/60 font-semibold"
+            }`}
+          >
+            <span className="w-8 h-8 rounded-full bg-crimson/10 text-crimson flex items-center justify-center font-serif text-sm font-bold shrink-0">
+              书
+            </span>
+            <div className="flex flex-col items-start sm:items-center text-left sm:text-center leading-tight">
+              <span className="text-sm sm:text-base font-bold">Writing Practice</span>
+              <span className="text-xs opacity-75 font-normal">汉字书写 · Stroke Pad</span>
+            </div>
+          </button>
+
+          {/* Tab 2: Phase 1 */}
+          <button
+            type="button"
+            onClick={() => setActiveTab("phase1")}
+            className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-200 flex items-center justify-center gap-3 text-center cursor-pointer ${
+              activeTab === "phase1" 
+                ? "bg-paper text-crimson font-black shadow-md border border-crimson/30 scale-[1.01]" 
+                : "text-muted-foreground hover:text-ink hover:bg-paper/60 font-semibold"
+            }`}
+          >
+            <span className="w-8 h-8 rounded-full bg-crimson/10 text-crimson flex items-center justify-center font-serif text-sm font-bold shrink-0">
+              音
+            </span>
+            <div className="flex flex-col items-start sm:items-center text-left sm:text-center leading-tight">
+              <span className="text-sm sm:text-base font-bold">Phase 1</span>
+              <span className="text-xs opacity-75 font-normal">Pinyin &amp; 4 Tones</span>
+            </div>
+          </button>
+
+          {/* Tab 3: Phase 2 */}
+          <button
+            type="button"
+            onClick={() => setActiveTab("phase2")}
+            className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-200 flex items-center justify-center gap-3 text-center cursor-pointer ${
+              activeTab === "phase2" 
+                ? "bg-paper text-crimson font-black shadow-md border border-crimson/30 scale-[1.01]" 
+                : "text-muted-foreground hover:text-ink hover:bg-paper/60 font-semibold"
+            }`}
+          >
+            <span className="w-8 h-8 rounded-full bg-crimson/10 text-crimson flex items-center justify-center font-serif text-sm font-bold shrink-0">
+              句
+            </span>
+            <div className="flex flex-col items-start sm:items-center text-left sm:text-center leading-tight">
+              <span className="text-sm sm:text-base font-bold">Phase 2</span>
+              <span className="text-xs opacity-75 font-normal">HSK 1 Sentence Grammar</span>
+            </div>
+          </button>
+        </div>
       </div>
 
       {/* Tab Content Box */}

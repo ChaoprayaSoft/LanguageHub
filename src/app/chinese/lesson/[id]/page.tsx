@@ -87,6 +87,52 @@ export default async function ChineseLessonPage({ params }: { params: Promise<{ 
                   </div>
                 </td>
               );
+            },
+            li: ({ node, children, ...props }) => {
+              const getText = (n: HastNode | undefined): string => {
+                if (!n) return "";
+                if (n.type === "text" && n.value) return n.value;
+                if (n.children) return n.children.map(getText).join("");
+                return "";
+              };
+              const text = node ? getText(node as HastNode) : "";
+              const chineseMatches = text.match(/[\u4e00-\u9fff]+/g);
+              const hasChinese = !!chineseMatches && chineseMatches.length > 0;
+              const chineseOnlyText = chineseMatches?.join(" ") || "";
+
+              return (
+                <li className="my-2.5 list-none flex items-start gap-3" {...props}>
+                  <span className="text-crimson font-bold select-none mt-1 text-xs">◆</span>
+                  <div className="flex-1 flex items-center justify-between gap-3 flex-wrap">
+                    <span className="leading-relaxed">{children}</span>
+                    {hasChinese && (
+                      <AudioPlayerButton text={chineseOnlyText} lang="zh-CN" accentColor="crimson" size="sm" />
+                    )}
+                  </div>
+                </li>
+              );
+            },
+            p: ({ node, children, ...props }) => {
+              const getText = (n: HastNode | undefined): string => {
+                if (!n) return "";
+                if (n.type === "text" && n.value) return n.value;
+                if (n.children) return n.children.map(getText).join("");
+                return "";
+              };
+              const text = node ? getText(node as HastNode) : "";
+              const isExample = text.toLowerCase().includes("example:") || text.includes("Example");
+              const chineseMatches = text.match(/[\u4e00-\u9fff]+/g);
+              const chineseOnlyText = chineseMatches?.join(" ") || "";
+
+              if (isExample && chineseOnlyText) {
+                return (
+                  <div className="my-3 p-3.5 bg-crimson/5 border border-crimson/20 rounded-xl flex items-center justify-between gap-3">
+                    <p className="my-0 leading-relaxed text-ink font-medium" {...props}>{children}</p>
+                    <AudioPlayerButton text={chineseOnlyText} lang="zh-CN" accentColor="crimson" size="sm" />
+                  </div>
+                );
+              }
+              return <p className="leading-relaxed" {...props}>{children}</p>;
             }
           }}
         >

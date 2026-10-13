@@ -75,10 +75,56 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
                 <td className="p-4 align-middle bg-paper" {...props}>
                   <div className="flex items-center gap-4">
                     <span className={hasKorean ? "font-bold text-xl text-jade" : ""}>{props.children}</span>
-                    {hasKorean && <AudioPlayerButton text={koreanOnlyText} lang="ko-KR" />}
+                    {hasKorean && <AudioPlayerButton text={koreanOnlyText} lang="ko-KR" accentColor="jade" />}
                   </div>
                 </td>
               );
+            },
+            li: ({ node, children, ...props }) => {
+              const getText = (n: HastNode | undefined): string => {
+                if (!n) return '';
+                if (n.type === 'text' && n.value) return n.value;
+                if (n.children) return n.children.map(getText).join('');
+                return '';
+              };
+              const text = node ? getText(node as HastNode) : '';
+              const koreanMatches = text.match(/[가-힣ㄱ-ㅎㅏ-ㅣ]+/g);
+              const hasKorean = !!koreanMatches && koreanMatches.length > 0;
+              const koreanOnlyText = koreanMatches?.join(' ') || '';
+
+              return (
+                <li className="my-2.5 list-none flex items-start gap-3" {...props}>
+                  <span className="text-jade font-bold select-none mt-1 text-xs">◆</span>
+                  <div className="flex-1 flex items-center justify-between gap-3 flex-wrap">
+                    <span className="leading-relaxed">{children}</span>
+                    {hasKorean && (
+                      <AudioPlayerButton text={koreanOnlyText} lang="ko-KR" accentColor="jade" size="sm" />
+                    )}
+                  </div>
+                </li>
+              );
+            },
+            p: ({ node, children, ...props }) => {
+              const getText = (n: HastNode | undefined): string => {
+                if (!n) return '';
+                if (n.type === 'text' && n.value) return n.value;
+                if (n.children) return n.children.map(getText).join('');
+                return '';
+              };
+              const text = node ? getText(node as HastNode) : '';
+              const isExample = text.toLowerCase().includes('example:') || text.includes('Example');
+              const koreanMatches = text.match(/[가-힣ㄱ-ㅎㅏ-ㅣ]+/g);
+              const koreanOnlyText = koreanMatches?.join(' ') || '';
+
+              if (isExample && koreanOnlyText) {
+                return (
+                  <div className="my-3 p-3.5 bg-jade/5 border border-jade/20 rounded-xl flex items-center justify-between gap-3">
+                    <p className="my-0 leading-relaxed text-ink font-medium" {...props}>{children}</p>
+                    <AudioPlayerButton text={koreanOnlyText} lang="ko-KR" accentColor="jade" size="sm" />
+                  </div>
+                );
+              }
+              return <p className="leading-relaxed" {...props}>{children}</p>;
             }
           }}
         >

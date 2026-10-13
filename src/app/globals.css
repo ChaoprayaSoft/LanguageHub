@@ -64,3 +64,13 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--ink);
 }
+
+/* Utility to completely hide scrollbar while allowing scrolling */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, XCircle, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import AudioPlayerButton from "@/components/AudioPlayerButton";
 
 interface Question {
   question: string;
@@ -119,51 +120,113 @@ export default function InteractiveWorkbook({
         exit={{ opacity: 0, x: -20 }}
         className="p-5 sm:p-8 border border-muted rounded-2xl bg-paper shadow-sm"
       >
-        <h3 className="text-xl sm:text-2xl font-bold text-ink mb-6">{currentQuestion.question}</h3>
-
-        <div className="grid gap-3">
-          {currentQuestion.options.map((option, idx) => {
-            const isSelected = selectedOption === option;
-            const isCorrect = option === currentQuestion.correctAnswer;
-            let btnClass = "border-muted text-ink hover:border-ink hover:bg-muted";
-
-            if (isAnswered) {
-              if (isCorrect) {
-                btnClass = "border-jade bg-jade/10 text-jade";
-              } else if (isSelected) {
-                btnClass = "border-crimson bg-crimson/10 text-crimson";
-              } else {
-                btnClass = "border-muted text-muted-foreground opacity-50";
-              }
+        {(() => {
+          const getAudioData = (str: string) => {
+            const chineseMatches = str.match(/[\u4e00-\u9fff]+/g);
+            if (chineseMatches && chineseMatches.length > 0 && (accentColor === "crimson" || !str.match(/[가-힣]/))) {
+              return { text: chineseMatches.join(" "), lang: "zh-CN" };
             }
+            const koreanMatches = str.match(/[가-힣ㄱ-ㅎㅏ-ㅣ]+/g);
+            if (koreanMatches && koreanMatches.length > 0) {
+              return { text: koreanMatches.join(" "), lang: "ko-KR" };
+            }
+            if (chineseMatches && chineseMatches.length > 0) {
+              return { text: chineseMatches.join(" "), lang: "zh-CN" };
+            }
+            return null;
+          };
 
-            return (
-              <button
-                key={idx}
-                onClick={() => handleOptionClick(option)}
-                disabled={isAnswered}
-                className={`w-full text-left p-4 min-h-[56px] rounded-xl border-2 transition-all font-medium text-base sm:text-lg flex justify-between items-center ${btnClass}`}
-              >
-                {option}
-                {isAnswered && isCorrect && <CheckCircle size={24} className="text-jade" />}
-                {isAnswered && isSelected && !isCorrect && <XCircle size={24} className="text-crimson" />}
-              </button>
-            );
-          })}
-        </div>
+          const qAudio = getAudioData(currentQuestion.question);
+          const expAudio = getAudioData(currentQuestion.explanation);
 
-        <AnimatePresence>
-          {isAnswered && (
-            <motion.div
-              initial={{ opacity: 0, height: 0, marginTop: 0 }}
-              animate={{ opacity: 1, height: "auto", marginTop: 24 }}
-              className="bg-muted p-4 rounded-xl"
-            >
-              <p className="text-ink text-sm font-medium mb-1">Explanation:</p>
-              <p className="text-muted-foreground">{currentQuestion.explanation}</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
+          return (
+            <>
+              <div className="flex items-start justify-between gap-3 mb-6">
+                <h3 className="text-xl sm:text-2xl font-bold text-ink leading-snug">
+                  {currentQuestion.question}
+                </h3>
+                {qAudio && (
+                  <AudioPlayerButton 
+                    text={qAudio.text} 
+                    lang={qAudio.lang} 
+                    accentColor={accentColor} 
+                    size="md"
+                    className="mt-0.5 shadow-xs"
+                  />
+                )}
+              </div>
+
+              <div className="grid gap-3">
+                {currentQuestion.options.map((option, idx) => {
+                  const isSelected = selectedOption === option;
+                  const isCorrect = option === currentQuestion.correctAnswer;
+                  const optAudio = getAudioData(option);
+                  let btnClass = "border-muted text-ink hover:border-ink hover:bg-muted";
+
+                  if (isAnswered) {
+                    if (isCorrect) {
+                      btnClass = "border-jade bg-jade/10 text-jade";
+                    } else if (isSelected) {
+                      btnClass = "border-crimson bg-crimson/10 text-crimson";
+                    } else {
+                      btnClass = "border-muted text-muted-foreground opacity-50";
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => handleOptionClick(option)}
+                      disabled={isAnswered}
+                      className={`w-full text-left p-4 min-h-[58px] rounded-xl border-2 transition-all font-medium text-base sm:text-lg flex justify-between items-center gap-3 cursor-pointer ${btnClass}`}
+                    >
+                      <span className="flex-1 leading-snug">{option}</span>
+                      
+                      <div className="flex items-center gap-2 shrink-0">
+                        {optAudio && (
+                          <AudioPlayerButton 
+                            text={optAudio.text} 
+                            lang={optAudio.lang} 
+                            accentColor={accentColor} 
+                            size="sm"
+                          />
+                        )}
+                        {isAnswered && isCorrect && <CheckCircle size={22} className="text-jade shrink-0" />}
+                        {isAnswered && isSelected && !isCorrect && <XCircle size={22} className="text-crimson shrink-0" />}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <AnimatePresence>
+                {isAnswered && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                    animate={{ opacity: 1, height: "auto", marginTop: 24 }}
+                    className="bg-muted p-4 sm:p-5 rounded-xl border border-muted/80"
+                  >
+                    <div className="flex items-center justify-between gap-3 mb-1.5">
+                      <p className="text-ink text-sm font-bold">Explanation:</p>
+                      {expAudio && (
+                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium">
+                          <span>Listen</span>
+                          <AudioPlayerButton 
+                            text={expAudio.text} 
+                            lang={expAudio.lang} 
+                            accentColor={accentColor} 
+                            size="sm"
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <p className="text-muted-foreground leading-relaxed">{currentQuestion.explanation}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </>
+          );
+        })()}
 
         {isAnswered && (
           <div className="mt-8 flex justify-end">

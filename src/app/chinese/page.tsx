@@ -157,14 +157,14 @@ export default function ChineseHub() {
   };
 
   const hsk1Lessons = [
-    ...chineseData.lessons.slice(0, 13),
+    ...Array.from({ length: 13 }, (_, i) => chineseData.lessons.find(l => l.id === `lesson-${i + 1}`)!),
     chineseData.lessons.find(l => l.id === "final-exam")!
-  ];
+  ].filter(Boolean);
 
   const hsk2Lessons = [
-    ...chineseData.lessons.slice(13, 19),
+    ...Array.from({ length: 6 }, (_, i) => chineseData.lessons.find(l => l.id === `lesson-${i + 14}`)!),
     chineseData.lessons.find(l => l.id === "final-exam-intermediate")!
-  ];
+  ].filter(Boolean);
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 md:space-y-12 px-4 md:px-0">

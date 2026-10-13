@@ -5,7 +5,7 @@ import FloatingScrollButton from "@/components/FloatingScrollButton";
 
 export const metadata: Metadata = {
   title: "Chinese Hub — Mr. Wei's Chinese Class | LanguageHub",
-  description: "Learn Mandarin Chinese from zero: master Pinyin, four tones, HSK 1 sentence structure, and interactive character handwriting.",
+  description: "Learn Mandarin Chinese from zero: master Pinyin, four tones, HSK 1 sentence structure, radicals, location, time, and tech vocabulary (Phases 1–4).",
 };
 
 export default function ChineseLayout({

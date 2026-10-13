@@ -50,7 +50,7 @@ export default function Home() {
 
               </div>
               <h2 className="text-xl sm:text-2xl font-bold text-ink group-hover:text-crimson transition-colors">Chinese</h2>
-              <p className="text-sm sm:text-base text-muted-foreground">Start with Mr. Wei&apos;s class. Master Pinyin, four tones, and core S-V-O sentences.</p>
+              <p className="text-sm sm:text-base text-muted-foreground">Start with Mr. Wei&apos;s class. Master Pinyin, core grammar, radicals, time, and tech logic (Phases 1–4).</p>
             </div>
             <div className="flex items-center text-crimson font-medium text-sm sm:text-base">
               Start Learning <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />

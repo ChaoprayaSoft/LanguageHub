@@ -13,7 +13,7 @@ export default async function ChineseWorkbookPage({ params }: { params: Promise<
     notFound();
   }
 
-  const backHref = lesson.id === "final-exam" ? "/chinese" : `/chinese/lesson/${lesson.id}`;
+  const backHref = lesson.id.startsWith("final-exam") ? "/chinese" : `/chinese/lesson/${lesson.id}`;
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 md:space-y-12 pb-12">

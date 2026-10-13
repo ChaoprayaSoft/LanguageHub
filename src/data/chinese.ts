@@ -223,9 +223,141 @@ $$\\text{Pronoun} + \\text{的} = \\text{Possessive}$$
 `
     },
     {
+      id: "lesson-7",
+      title: "Lesson 7: The Logic of Radicals",
+      phase: "Phase 3: Radicals & Character Building Blocks",
+      description: "Understand how Chinese characters are constructed using semantic radicals (class tags).",
+      content: `Welcome to **Phase 3**! Chinese characters (**汉字**) are not random drawings. They are systematically assembled from smaller building blocks called **Radicals (部首 - bù shǒu)**.
+
+Radicals provide immediate semantic hints about the core meaning of a character. Think of radicals as **class tags** or **category types**!
+
+---
+
+### Core Semantic Radicals
+
+| Radical | Meaning / Category | Example Character | Pinyin & Meaning | Logic Connection |
+| :--- | :--- | :---: | :--- | :--- |
+| **氵** | Water / Liquid | **喝** | hē (To drink) | Requires liquid / water! Also: **海** (hǎi - Sea) |
+| **亻** | Person / Human | **你** | nǐ (You) | Refers to a human being. Also: **休** (xiū - Rest) |
+| **讠** | Speech / Language | **语** | yǔ (Language/Speech) | Relates to speaking words. Also: **话** (huà - words) |
+| **木** | Wood / Tree | **桌** | zhuō (Table) | Crafted from wood. Also: **林** (lín - Forest) |
+
+---
+
+### Structural Deconstruction
+
+* **休 (Rest):** A person (**亻**) resting beside a tree (**木**).
+* **林 (Forest):** Two trees (**木** + **木**) standing together.
+* **海 (Sea):** Three-dot water radical (**氵**) indicating the ocean.
+* **汉语 (Chinese Language):** Speech radical (**讠**) denoting language.
+`
+    },
+    {
+      id: "lesson-8",
+      title: "Lesson 8: Adding \"Where\" (Location)",
+      phase: "Phase 3: Radicals & Character Building Blocks",
+      description: "Learn how to express location using 在 (zài) and the Subject + Location + Verb blueprint.",
+      content: `In Chinese, the location where an action happens must come **BEFORE the verb**! 
+
+We use the word **在 (zài)**, which means *"at / in / on"*.
+
+---
+
+### Master Location Blueprint
+
+$$\\text{Subject} + \\text{在 (zài)} + \\text{Location} + \\text{Verb} + \\text{Object}$$
+
+> **Mental Model:** In Chinese logic, you must be present at the location *before* you can perform the action!
+
+---
+
+### Key Location Nouns
+
+| Character | Pinyin | Meaning | Example Phrase |
+| :--- | :--- | :--- | :--- |
+| **家** | jiā | Home | **在家** (at home) |
+| **学校** | xué xiào | School | **在学校** (at school) |
+| **商店** | shāng diàn | Store / Shop | **在商店** (at the store) |
+
+---
+
+### Example Sentences
+
+* **我在家看书。** (*wǒ zài jiā kàn shū.*) — I read a book at home.
+* **他在学校。** (*tā zài xué xiào.*) — He is at school.
+* **你在学校吃苹果吗？** (*nǐ zài xué xiào chī píng guǒ ma?*) — Do you eat apples at school?
+* **我在家喝水。** (*wǒ zài jiā hē shuǐ.*) — I drink water at home.
+`
+    },
+    {
+      id: "lesson-9",
+      title: "Lesson 9: The Timeline (Time Words)",
+      phase: "Phase 4: Everyday & Technical Vocabulary",
+      description: "Master time expressions and learn where to place time words in Chinese sentences.",
+      content: `Just like Location, **Time words must always come BEFORE the verb in Chinese**!
+
+You can place the time phrase either at the very beginning of the sentence or right after the Subject:
+
+$$\\text{Time} + \\text{Subject} + \\text{Verb} + \\text{Object} \\quad \\text{or} \\quad \\text{Subject} + \\text{Time} + \\text{Verb} + \\text{Object}$$
+
+---
+
+### Core Timeline Vocabulary
+
+| Time Word | Pinyin | Meaning | Usage Example |
+| :--- | :--- | :--- | :--- |
+| **今天** | jīn tiān | Today | **今天我喝水。** (Today I drink water.) |
+| **明天** | míng tiān | Tomorrow | **明天我在家。** (Tomorrow I am at home.) |
+| **点** | diǎn | O'clock | **八点** (8 o'clock) · **三点** (3 o'clock) |
+
+---
+
+### Example Sentences
+
+* **今天我喝水。** (*jīn tiān wǒ hē shuǐ.*) — Today I drink water.
+* **明天我在家。** (*míng tiān wǒ zài jiā.*) — Tomorrow I am at home.
+* **我八点看书。** (*wǒ bā diǎn kàn shū.*) — I read a book at 8 o'clock.
+* **今天我吃苹果。** (*jīn tiān wǒ chī píng guǒ.*) — Today I eat an apple.
+`
+    },
+    {
+      id: "lesson-10",
+      title: "Lesson 10: Tech Nouns & Action Verbs",
+      phase: "Phase 4: Everyday & Technical Vocabulary",
+      description: "Explore tech terminology (computer, phone) and combine Time + Subject + Location + Verb + Object.",
+      content: `Chinese technical terms are descriptive and highly modular:
+* A computer is an **"electric brain"** (**电脑** - *diàn nǎo*).
+* A mobile phone is a **"hand machine"** (**手机** - *shǒu jī*).
+
+---
+
+### Tech Vocabulary & Daily Verbs
+
+| Character | Pinyin | Literal Breakdown | English Meaning |
+| :--- | :--- | :--- | :--- |
+| **电脑** | diàn nǎo | Electric (电) + Brain (脑) | Computer |
+| **手机** | shǒu jī | Hand (手) + Machine (机) | Mobile Phone |
+| **做** | zuò | N/A | To do / To make |
+| **买** | mǎi | N/A | To buy |
+
+---
+
+### The Grand Master Blueprint
+
+Now we can combine all grammar layers into one complete Chinese sentence algorithm:
+
+$$\\text{Time} + \\text{Subject} + \\text{在 Location} + \\text{Verb} + \\text{Object}$$
+
+* **明天，我在商店买电脑。** (*míng tiān, wǒ zài shāng diàn mǎi diàn nǎo.*) — Tomorrow, I buy a computer at the store.
+* **今天我做电脑。** (*jīn tiān wǒ zuò diàn nǎo.*) — Today I make computers.
+* **他在商店买手机。** (*tā zài shāng diàn mǎi shǒu jī.*) — He buys a phone at the store.
+* **你买手机吗？** (*nǐ mǎi shǒu jī ma?*) — Do you buy a phone?
+`
+    },
+    {
       id: "final-exam",
       title: "Final Exam: Phase 1 & 2 Review",
-      phase: "Comprehensive Review",
+      phase: "Beginner Review",
       description: "Test your complete knowledge across Pinyin, tones, HSK 1 grammar, and vocabulary.",
       content: `Congratulations on completing **Phase 1 (The Pronunciation Engine)** and **Phase 2 (Core Sentence Structure)**!
 
@@ -238,6 +370,23 @@ This comprehensive exam reviews:
 * Possession with **的**
 
 Take your time, read each character and Pinyin prompt carefully, and score 100% to earn your Phase 1 & 2 Master badge!
+`
+    },
+    {
+      id: "final-exam-intermediate",
+      title: "Final Exam: Phase 3 & 4 Review",
+      phase: "Intermediate Review",
+      description: "Test your mastery of radicals, location markers (在), time expressions, and technical vocabulary.",
+      content: `Congratulations on completing **Phase 3 (Radicals & Character Building Blocks)** and **Phase 4 (Everyday & Technical Vocabulary)**!
+
+This comprehensive intermediate exam tests:
+* Semantic radical recognition (氵, 亻, 讠, 木)
+* The Location Blueprint with **在** (Subject + 在 Location + Verb + Object)
+* Time positioning rules (今天, 明天, 点)
+* Technical vocabulary (电脑, 手机, 做, 买)
+* Multi-clause sentence comprehension
+
+Prove your intermediate Chinese mastery and complete Phase 3 & 4!
 `
     }
   ],
@@ -651,6 +800,311 @@ Take your time, read each character and Pinyin prompt carefully, and score 100% 
         options: ["他是学生吗？", "他是学生什么？", "他是谁？", "他是不是？"],
         correctAnswer: "他是学生吗？",
         explanation: "Simply attach 吗 (ma) to the end: 他是学生吗？"
+      }
+    ],
+    "lesson-7": [
+      {
+        question: "What does the radical 氵 represent?",
+        type: "multiple-choice",
+        options: ["Water / Liquid", "Person", "Tree / Wood", "Speech"],
+        correctAnswer: "Water / Liquid",
+        explanation: "The three-dot water radical (三点水 - 氵) signifies water or liquid."
+      },
+      {
+        question: "If a character has the 讠 radical, what is it likely related to?",
+        type: "multiple-choice",
+        options: ["Speech / Language", "Water / Liquid", "Food / Eating", "Metal / Money"],
+        correctAnswer: "Speech / Language",
+        explanation: "The speech radical (言字旁 - 讠) relates to speaking, words, or language (e.g. 语, 话, 说)."
+      },
+      {
+        question: "What is the radical for 'Person'?",
+        type: "multiple-choice",
+        options: ["亻", "氵", "讠", "木"],
+        correctAnswer: "亻",
+        explanation: "The single person radical (单人旁 - 亻) represents human beings (e.g. 你, 他, 休)."
+      },
+      {
+        question: "Which of these characters likely means 'Sea' or 'Ocean'?",
+        type: "multiple-choice",
+        options: ["海 (hǎi)", "林 (lín)", "休 (xiū)", "桌 (zhuō)"],
+        correctAnswer: "海 (hǎi)",
+        explanation: "Notice the water radical 氵 on the left side of 海! 林 means forest, and 休 means rest."
+      },
+      {
+        question: "Translate to English: 喝 (hē)",
+        type: "multiple-choice",
+        options: ["To drink", "To eat", "To look / read", "To buy"],
+        correctAnswer: "To drink",
+        explanation: "喝 (hē) means to drink (needs liquid!)."
+      },
+      {
+        question: "What is the Pinyin for 'You' (你)?",
+        type: "multiple-choice",
+        options: ["nǐ", "wǒ", "tā", "shì"],
+        correctAnswer: "nǐ",
+        explanation: "你 is pronounced 'nǐ' with the 3rd tone."
+      },
+      {
+        question: "Translate to English: 语 (yǔ)",
+        type: "multiple-choice",
+        options: ["Language / Speech", "Water", "Table", "Apple"],
+        correctAnswer: "Language / Speech",
+        explanation: "语 (yǔ) means language or speech (e.g. 汉语 - Mandarin Chinese)."
+      },
+      {
+        question: "True or False: Radicals help you guess the meaning of an unfamiliar character.",
+        type: "multiple-choice",
+        options: ["True", "False"],
+        correctAnswer: "True",
+        explanation: "True! Radicals act as semantic clues or category types in Chinese characters."
+      }
+    ],
+    "lesson-8": [
+      {
+        question: "In Chinese, does the location phrase come BEFORE or AFTER the verb?",
+        type: "multiple-choice",
+        options: ["BEFORE the verb", "AFTER the verb", "At the very end of the sentence", "Anywhere randomly"],
+        correctAnswer: "BEFORE the verb",
+        explanation: "In Chinese, location happens before the action: Subject + 在 + Location + Verb + Object."
+      },
+      {
+        question: "What Chinese word means 'at / in / on'?",
+        type: "multiple-choice",
+        options: ["在 (zài)", "是 (shì)", "的 (de)", "吗 (ma)"],
+        correctAnswer: "在 (zài)",
+        explanation: "在 (zài) indicates physical presence or location."
+      },
+      {
+        question: "Translate to English: 他在学校。 (tā zài xué xiào.)",
+        type: "multiple-choice",
+        options: ["He is at school.", "I am at home.", "He is a student.", "She goes to school."],
+        correctAnswer: "He is at school.",
+        explanation: "他 (He) + 在 (at) + 学校 (school)."
+      },
+      {
+        question: "Translate to Pinyin: 'Home' (家)",
+        type: "multiple-choice",
+        options: ["jiā", "xué xiào", "shāng diàn", "shū"],
+        correctAnswer: "jiā",
+        explanation: "家 is pronounced 'jiā' (1st tone)."
+      },
+      {
+        question: "Sentence Scramble: Rearrange [水 / 喝 / 在家 / 我] to mean 'I drink water at home':",
+        type: "multiple-choice",
+        options: ["我在家喝水。", "我喝水在家。", "在家我水喝。", "水喝我在家。"],
+        correctAnswer: "我在家喝水。",
+        explanation: "Subject (我) + Location (在家) + Verb (喝) + Object (水)."
+      },
+      {
+        question: "Translate to Chinese characters: 'Store / Shop'",
+        type: "multiple-choice",
+        options: ["商店", "学校", "家里", "学生"],
+        correctAnswer: "商店",
+        explanation: "商店 (shāng diàn) means store or shop."
+      },
+      {
+        question: "Translate to English: 你在学校吃苹果吗？ (nǐ zài xué xiào chī píng guǒ ma?)",
+        type: "multiple-choice",
+        options: ["Do you eat apples at school?", "Are you eating at home?", "Do you buy apples at school?", "Is the apple at school?"],
+        correctAnswer: "Do you eat apples at school?",
+        explanation: "你 (You) + 在学校 (at school) + 吃苹果 (eat apples) + 吗 (question)?"
+      },
+      {
+        question: "Fill in the blank: wǒ ___ xué xiào kàn shū. (I read at school).",
+        type: "multiple-choice",
+        options: ["zài (在)", "shì (是)", "de (的)", "ma (吗)"],
+        correctAnswer: "zài (在)",
+        explanation: "Use 在 (zài) before the location xué xiào."
+      }
+    ],
+    "lesson-9": [
+      {
+        question: "Translate to English: 今天 (jīn tiān)",
+        type: "multiple-choice",
+        options: ["Today", "Tomorrow", "Yesterday", "8 O'clock"],
+        correctAnswer: "Today",
+        explanation: "今天 (jīn tiān) means 'Today'."
+      },
+      {
+        question: "Translate to Pinyin: 'Tomorrow' (明天)",
+        type: "multiple-choice",
+        options: ["míng tiān", "jīn tiān", "zuó tiān", "bā diǎn"],
+        correctAnswer: "míng tiān",
+        explanation: "明天 is pronounced 'míng tiān'."
+      },
+      {
+        question: "How do you say '3 o'clock' in Chinese? (Use 3 + diǎn)",
+        type: "multiple-choice",
+        options: ["三点 (sān diǎn)", "八点 (bā diǎn)", "五点 (wǔ diǎn)", "四点 (sì diǎn)"],
+        correctAnswer: "三点 (sān diǎn)",
+        explanation: "3 is 三 (sān) + 点 (diǎn) = 三点 (sān diǎn)."
+      },
+      {
+        question: "Translate to English: 明天我在家。 (míng tiān wǒ zài jiā.)",
+        type: "multiple-choice",
+        options: ["Tomorrow I am at home.", "Today I am at school.", "Tomorrow I buy a book.", "I am at home today."],
+        correctAnswer: "Tomorrow I am at home.",
+        explanation: "明天 (Tomorrow) + 我 (I) + 在家 (at home)."
+      },
+      {
+        question: "Sentence Scramble: Rearrange [看书 / 我 / 八点] to mean 'I read at 8 o'clock':",
+        type: "multiple-choice",
+        options: ["我八点看书。", "我看书八点。", "八点看书我。", "看书我八点。"],
+        correctAnswer: "我八点看书。",
+        explanation: "Time comes before the verb: Subject (我) + Time (八点) + Verb/Object (看书)."
+      },
+      {
+        question: "True or False: Time words go at the very end of a Chinese sentence.",
+        type: "multiple-choice",
+        options: ["False (They go before the verb)", "True (They go at the very end)"],
+        correctAnswer: "False (They go before the verb)",
+        explanation: "False! In Chinese, time must come BEFORE the verb."
+      },
+      {
+        question: "Translate to Chinese: 'Today I eat an apple.'",
+        type: "multiple-choice",
+        options: ["今天我吃苹果。", "明天我吃苹果。", "我吃苹果今天。", "今天我喝水。"],
+        correctAnswer: "今天我吃苹果。",
+        explanation: "今天 (Today) + 我 (I) + 吃苹果 (eat an apple)."
+      },
+      {
+        question: "Match: What does 'diǎn' (点) mean when following a number?",
+        type: "multiple-choice",
+        options: ["O'clock", "Day", "Tomorrow", "Month"],
+        correctAnswer: "O'clock",
+        explanation: "点 (diǎn) means o'clock."
+      }
+    ],
+    "lesson-10": [
+      {
+        question: "What does 电脑 (diàn nǎo - computer) literally translate to?",
+        type: "multiple-choice",
+        options: ["Electric Brain", "Hand Machine", "Thinking Box", "Digital Mind"],
+        correctAnswer: "Electric Brain",
+        explanation: "电 (electric) + 脑 (brain) = Computer!"
+      },
+      {
+        question: "Translate to English: 手机 (shǒu jī)",
+        type: "multiple-choice",
+        options: ["Mobile Phone", "Computer", "Book", "Watch"],
+        correctAnswer: "Mobile Phone",
+        explanation: "手 (hand) + 机 (machine) = Mobile phone."
+      },
+      {
+        question: "What is the Chinese verb for 'to buy'?",
+        type: "multiple-choice",
+        options: ["买 (mǎi)", "做 (zuò)", "吃 (chī)", "看 (kàn)"],
+        correctAnswer: "买 (mǎi)",
+        explanation: "买 (mǎi) means to buy."
+      },
+      {
+        question: "Translate to English: 我做电脑。 (wǒ zuò diàn nǎo.)",
+        type: "multiple-choice",
+        options: ["I make computers.", "I buy a computer.", "I have a phone.", "He makes computers."],
+        correctAnswer: "I make computers.",
+        explanation: "我 (I) + 做 (make/do) + 电脑 (computers)."
+      },
+      {
+        question: "Sentence Scramble: Rearrange [买 / 手机 / 他 / 在商店] to mean 'He buys a phone at the store':",
+        type: "multiple-choice",
+        options: ["他在商店买手机。", "他买手机在商店。", "在商店买他手机。", "买手机他在商店。"],
+        correctAnswer: "他在商店买手机。",
+        explanation: "Subject (他) + Location (在商店) + Verb (买) + Object (手机)."
+      },
+      {
+        question: "Translate to Pinyin: 'To do / To make' (做)",
+        type: "multiple-choice",
+        options: ["zuò", "mǎi", "diǎn", "jiā"],
+        correctAnswer: "zuò",
+        explanation: "做 is pronounced 'zuò' (4th tone)."
+      },
+      {
+        question: "Translate to Chinese: 'Today I am at home.'",
+        type: "multiple-choice",
+        options: ["今天我在家。", "明天我在家。", "今天我在学校。", "我做电脑今天。"],
+        correctAnswer: "今天我在家。",
+        explanation: "今天 (Today) + 我 (I) + 在家 (at home)."
+      },
+      {
+        question: "What particle turns '你买手机。' (You buy a phone) into a question?",
+        type: "multiple-choice",
+        options: ["吗 (ma)", "的 (de)", "在 (zài)", "是 (shì)"],
+        correctAnswer: "吗 (ma)",
+        explanation: "Adding 吗 turns it into: 你买手机吗？ (Do you buy a phone?)."
+      }
+    ],
+    "final-exam-intermediate": [
+      {
+        question: "Which radical indicates a connection to water or liquid?",
+        type: "multiple-choice",
+        options: ["氵 (三点水)", "亻 (单人旁)", "讠 (言字旁)", "木 (木字旁)"],
+        correctAnswer: "氵 (三点水)",
+        explanation: "氵 signifies water or liquid (as seen in 喝, 海, 冰)."
+      },
+      {
+        question: "Where must location phrases with 在 (zài) be placed in Chinese?",
+        type: "multiple-choice",
+        options: ["BEFORE the main verb", "AFTER the direct object", "At the very end of the sentence", "Right before the period"],
+        correctAnswer: "BEFORE the main verb",
+        explanation: "Location precedes action: Subject + 在 Location + Verb + Object."
+      },
+      {
+        question: "What does the tech term 电脑 (diàn nǎo) mean literally?",
+        type: "multiple-choice",
+        options: ["Electric Brain (Computer)", "Hand Machine (Phone)", "Smart Device", "Digital Network"],
+        correctAnswer: "Electric Brain (Computer)",
+        explanation: "电 (electric) + 脑 (brain) = Computer."
+      },
+      {
+        question: "Translate to English: 明天，我在商店买电脑。 (míng tiān, wǒ zài shāng diàn mǎi diàn nǎo.)",
+        type: "multiple-choice",
+        options: [
+          "Tomorrow, I buy a computer at the store.",
+          "Today, I make a phone at school.",
+          "Tomorrow, he sells computers at home.",
+          "I am at the store buying a phone today."
+        ],
+        correctAnswer: "Tomorrow, I buy a computer at the store.",
+        explanation: "明天 (Tomorrow) + 我 (I) + 在商店 (at the store) + 买电脑 (buy a computer)."
+      },
+      {
+        question: "How do you say 'Today at 8 o'clock I read at home' in Chinese?",
+        type: "multiple-choice",
+        options: [
+          "今天我八点在家看书。",
+          "我看书在家今天八点。",
+          "八点今天我看书在家。",
+          "在家八点我今天看书。"
+        ],
+        correctAnswer: "今天我八点在家看书。",
+        explanation: "Time (今天八点) + Location (在家) + Verb/Object (看书)."
+      },
+      {
+        question: "Which character refers to a 'Mobile Phone'?",
+        type: "multiple-choice",
+        options: ["手机 (shǒu jī)", "电脑 (diàn nǎo)", "商店 (shāng diàn)", "学校 (xué xiào)"],
+        correctAnswer: "手机 (shǒu jī)",
+        explanation: "手机 (hand machine) = Mobile phone."
+      },
+      {
+        question: "Translate: 'Does he buy a phone at school?'",
+        type: "multiple-choice",
+        options: [
+          "他在学校买手机吗？",
+          "他在家买手机吗？",
+          "他买手机在学校？",
+          "他是学校买手机吗？"
+        ],
+        correctAnswer: "他在学校买手机吗？",
+        explanation: "他 (He) + 在学校 (at school) + 买手机 (buy phone) + 吗 (question particle)?"
+      },
+      {
+        question: "What is the Chinese character for 'to do / to make'?",
+        type: "multiple-choice",
+        options: ["做 (zuò)", "买 (mǎi)", "喝 (hē)", "看 (kàn)"],
+        correctAnswer: "做 (zuò)",
+        explanation: "做 (zuò) means to do or to make."
       }
     ]
   }

@@ -60,11 +60,38 @@ const practiceSets: { id: string; name: string; items: PracticeItem[] }[] = [
       { char: "妈妈", meaning: "Mom / Mother", pinyin: "mā ma" },
       { char: "马", meaning: "Horse", pinyin: "mǎ" }
     ] 
+  },
+  { 
+    id: "location_time", 
+    name: "Locations & Time (地点与时间)", 
+    items: [
+      { char: "在", meaning: "at / in / on", pinyin: "zài" },
+      { char: "家", meaning: "Home", pinyin: "jiā" },
+      { char: "学校", meaning: "School", pinyin: "xué xiào" },
+      { char: "商店", meaning: "Store / Shop", pinyin: "shāng diàn" },
+      { char: "今天", meaning: "Today", pinyin: "jīn tiān" },
+      { char: "明天", meaning: "Tomorrow", pinyin: "míng tiān" },
+      { char: "点", meaning: "O'clock", pinyin: "diǎn" }
+    ] 
+  },
+  { 
+    id: "tech_radicals", 
+    name: "Tech Nouns & Radicals (科技与部首)", 
+    items: [
+      { char: "电脑", meaning: "Computer (Electric Brain)", pinyin: "diàn nǎo" },
+      { char: "手机", meaning: "Mobile Phone (Hand Machine)", pinyin: "shǒu jī" },
+      { char: "做", meaning: "to do / to make", pinyin: "zuò" },
+      { char: "买", meaning: "to buy", pinyin: "mǎi" },
+      { char: "语", meaning: "Language / Speech", pinyin: "yǔ" },
+      { char: "海", meaning: "Sea / Ocean (Water radical)", pinyin: "hǎi" },
+      { char: "休", meaning: "Rest (Person + Tree)", pinyin: "xiū" },
+      { char: "林", meaning: "Forest (Wood + Wood)", pinyin: "lín" }
+    ] 
   }
 ];
 
 export default function ChineseHub() {
-  const [activeTab, setActiveTab] = useState<"practice" | "phase1" | "phase2">("practice");
+  const [activeTab, setActiveTab] = useState<"practice" | "beginner" | "intermediate">("practice");
   const [activeSetId, setActiveSetId] = useState(practiceSets[0].id);
   const [practiceCharIndex, setPracticeCharIndex] = useState(0);
 
@@ -78,18 +105,25 @@ export default function ChineseHub() {
     }
   };
 
-  const phase1Lessons = chineseData.lessons.slice(0, 2);
-  const phase2Lessons = chineseData.lessons.slice(2);
+  const beginnerLessons = [
+    ...chineseData.lessons.slice(0, 6),
+    chineseData.lessons.find(l => l.id === "final-exam")!
+  ];
+
+  const intermediateLessons = [
+    ...chineseData.lessons.slice(6, 10),
+    chineseData.lessons.find(l => l.id === "final-exam-intermediate")!
+  ];
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 md:space-y-12 px-4 md:px-0">
       {/* Oriental Header Banner */}
       <div className="text-center space-y-4 md:space-y-6 flex flex-col items-center relative">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-crimson/30 bg-crimson/5 text-crimson text-xs sm:text-sm font-semibold tracking-wide">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-crimson/30 bg-crimson/5 text-crimson text-xs sm:text-sm font-semibold tracking-wide">
           <span className="w-5 h-5 rounded-full bg-crimson text-paper flex items-center justify-center font-serif text-xs font-bold shadow-xs">
             印
           </span>
-          <span>Chinese Master Plan · 阶段一与阶段二</span>
+          <span>Chinese Master Plan · 阶段一至阶段四 (Phase 1 to 4)</span>
         </div>
 
         <h1 className="text-4xl md:text-6xl font-black text-ink tracking-tight flex items-center justify-center gap-3">
@@ -97,10 +131,9 @@ export default function ChineseHub() {
         </h1>
         
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Welcome to Chinese, Khaopan! I am Mr. Wei. This workbook contains your complete 
-          <strong className="text-ink font-semibold"> Phase 1 (Pronunciation Engine)</strong> and 
-          <strong className="text-ink font-semibold"> Phase 2 (Core Sentence Structure)</strong> training. 
-          Let&apos;s start compiling your new language.
+          Welcome, Khaopan! Master Chinese from zero with 
+          <strong className="text-ink font-semibold"> Phase 1 &amp; 2 (Pronunciation &amp; Core Grammar)</strong> and 
+          <strong className="text-ink font-semibold"> Phase 3 &amp; 4 (Radicals, Locations, Time &amp; Tech Logic)</strong>.
         </p>
       </div>
 
@@ -126,41 +159,41 @@ export default function ChineseHub() {
             </div>
           </button>
 
-          {/* Tab 2: Phase 1 */}
+          {/* Tab 2: Beginner (Phase 1 & 2) */}
           <button
             type="button"
-            onClick={() => setActiveTab("phase1")}
+            onClick={() => setActiveTab("beginner")}
             className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-200 flex items-center justify-center gap-3 text-center cursor-pointer ${
-              activeTab === "phase1" 
+              activeTab === "beginner" 
                 ? "bg-paper text-crimson font-black shadow-md border border-crimson/30 scale-[1.01]" 
                 : "text-muted-foreground hover:text-ink hover:bg-paper/60 font-semibold"
             }`}
           >
             <span className="w-8 h-8 rounded-full bg-crimson/10 text-crimson flex items-center justify-center font-serif text-sm font-bold shrink-0">
-              音
+              初
             </span>
             <div className="flex flex-col items-start sm:items-center text-left sm:text-center leading-tight">
-              <span className="text-sm sm:text-base font-bold">Phase 1</span>
-              <span className="text-xs opacity-75 font-normal">Pinyin &amp; 4 Tones</span>
+              <span className="text-sm sm:text-base font-bold">Beginner Level</span>
+              <span className="text-xs opacity-75 font-normal">Phase 1 &amp; 2 · Pinyin &amp; S-V-O</span>
             </div>
           </button>
 
-          {/* Tab 3: Phase 2 */}
+          {/* Tab 3: Intermediate (Phase 3 & 4) */}
           <button
             type="button"
-            onClick={() => setActiveTab("phase2")}
+            onClick={() => setActiveTab("intermediate")}
             className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-200 flex items-center justify-center gap-3 text-center cursor-pointer ${
-              activeTab === "phase2" 
+              activeTab === "intermediate" 
                 ? "bg-paper text-crimson font-black shadow-md border border-crimson/30 scale-[1.01]" 
                 : "text-muted-foreground hover:text-ink hover:bg-paper/60 font-semibold"
             }`}
           >
             <span className="w-8 h-8 rounded-full bg-crimson/10 text-crimson flex items-center justify-center font-serif text-sm font-bold shrink-0">
-              句
+              进
             </span>
             <div className="flex flex-col items-start sm:items-center text-left sm:text-center leading-tight">
-              <span className="text-sm sm:text-base font-bold">Phase 2</span>
-              <span className="text-xs opacity-75 font-normal">HSK 1 Sentence Grammar</span>
+              <span className="text-sm sm:text-base font-bold">Intermediate Level</span>
+              <span className="text-xs opacity-75 font-normal">Phase 3 &amp; 4 · Radicals &amp; Logic</span>
             </div>
           </button>
         </div>
@@ -176,8 +209,8 @@ export default function ChineseHub() {
                 <span>Hanzi Character Practice</span>
               </>
             )}
-            {activeTab === "phase1" && "Phase 1: The Pronunciation Engine (Pinyin & Tones)"}
-            {activeTab === "phase2" && "Phase 2: Core HSK 1 Grammar (S-V-O Structure)"}
+            {activeTab === "beginner" && "Beginner: Phase 1 & 2 Foundations"}
+            {activeTab === "intermediate" && "Intermediate: Phase 3 & 4 Modular Logic"}
           </h2>
 
           {activeTab === "practice" && (
@@ -225,7 +258,7 @@ export default function ChineseHub() {
                 <button
                   key={`${item.char}-${idx}`}
                   onClick={() => setPracticeCharIndex(idx)}
-                  className={`px-4 h-12 min-w-12 rounded-xl font-bold text-lg sm:text-xl transition-all whitespace-nowrap ${
+                  className={`px-4 h-12 min-w-12 rounded-xl font-bold text-lg sm:text-xl transition-all whitespace-nowrap cursor-pointer ${
                     idx === practiceCharIndex 
                       ? "bg-crimson text-white shadow-md scale-105" 
                       : "bg-muted text-ink hover:bg-muted-foreground/20"
@@ -238,16 +271,16 @@ export default function ChineseHub() {
           </div>
         )}
 
-        {/* Phase 1 Jump Grid */}
-        {activeTab === "phase1" && (
+        {/* Beginner Jump Grid (Lessons 1-6 + Exam) */}
+        {activeTab === "beginner" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <button 
               onClick={() => scrollToLesson("lesson-1")} 
-              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group"
+              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 1</span>
-                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Pinyin & Tones</span>
+                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Pinyin &amp; Tones</span>
               </div>
               <span className="text-ink font-bold text-lg block group-hover:text-crimson transition-colors">
                 Pinyin and The Four Tones
@@ -257,26 +290,21 @@ export default function ChineseHub() {
 
             <button 
               onClick={() => scrollToLesson("lesson-2")} 
-              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group"
+              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 2</span>
-                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Vocab & Numbers</span>
+                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Greetings &amp; Numbers</span>
               </div>
               <span className="text-ink font-bold text-lg block group-hover:text-crimson transition-colors">
                 Greetings and Numbers
               </span>
-              <p className="text-sm text-muted-foreground mt-1">你好, 谢谢, 再见 & Numbers 1 through 10.</p>
+              <p className="text-sm text-muted-foreground mt-1">你好, 谢谢, 再见 &amp; Numbers 1 to 10.</p>
             </button>
-          </div>
-        )}
 
-        {/* Phase 2 Jump Grid */}
-        {activeTab === "phase2" && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <button 
               onClick={() => scrollToLesson("lesson-3")} 
-              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group"
+              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 3</span>
@@ -290,7 +318,7 @@ export default function ChineseHub() {
 
             <button 
               onClick={() => scrollToLesson("lesson-4")} 
-              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group"
+              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 4</span>
@@ -304,7 +332,7 @@ export default function ChineseHub() {
 
             <button 
               onClick={() => scrollToLesson("lesson-5")} 
-              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group"
+              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 5</span>
@@ -318,7 +346,7 @@ export default function ChineseHub() {
 
             <button 
               onClick={() => scrollToLesson("lesson-6")} 
-              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group"
+              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 6</span>
@@ -332,13 +360,85 @@ export default function ChineseHub() {
 
             <button 
               onClick={() => scrollToLesson("final-exam")} 
-              className="p-5 rounded-2xl bg-crimson/10 border-2 border-crimson/30 text-center hover:bg-crimson/20 hover:border-crimson transition-all sm:col-span-2 group"
+              className="p-5 rounded-2xl bg-crimson/10 border-2 border-crimson/30 text-center hover:bg-crimson/20 hover:border-crimson transition-all sm:col-span-2 group cursor-pointer"
             >
               <div className="flex items-center justify-center gap-2 mb-1">
                 <Award className="text-crimson w-6 h-6 animate-bounce" />
-                <span className="text-crimson font-black text-xl">Comprehensive Final Exam</span>
+                <span className="text-crimson font-black text-xl">Beginner Final Exam</span>
               </div>
               <span className="text-ink font-medium">Test your mastery of Phase 1 &amp; Phase 2!</span>
+            </button>
+          </div>
+        )}
+
+        {/* Intermediate Jump Grid (Lessons 7-10 + Exam) */}
+        {activeTab === "intermediate" && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <button 
+              onClick={() => scrollToLesson("lesson-7")} 
+              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 7</span>
+                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Phase 3 · Radicals</span>
+              </div>
+              <span className="text-ink font-bold text-lg block group-hover:text-crimson transition-colors">
+                The Logic of Radicals
+              </span>
+              <p className="text-sm text-muted-foreground mt-1">氵(Water), 亻(Person), 讠(Speech), 木(Wood).</p>
+            </button>
+
+            <button 
+              onClick={() => scrollToLesson("lesson-8")} 
+              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 8</span>
+                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Phase 3 · Location</span>
+              </div>
+              <span className="text-ink font-bold text-lg block group-hover:text-crimson transition-colors">
+                Adding &quot;Where&quot; (Location)
+              </span>
+              <p className="text-sm text-muted-foreground mt-1">在 (zài) protocol: Subject + 在 Location + Verb + Object.</p>
+            </button>
+
+            <button 
+              onClick={() => scrollToLesson("lesson-9")} 
+              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 9</span>
+                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Phase 4 · Timeline</span>
+              </div>
+              <span className="text-ink font-bold text-lg block group-hover:text-crimson transition-colors">
+                The Timeline (Time Words)
+              </span>
+              <p className="text-sm text-muted-foreground mt-1">今天 (Today), 明天 (Tomorrow), 点 (O&apos;clock) positioning.</p>
+            </button>
+
+            <button 
+              onClick={() => scrollToLesson("lesson-10")} 
+              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 10</span>
+                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Phase 4 · Tech Logic</span>
+              </div>
+              <span className="text-ink font-bold text-lg block group-hover:text-crimson transition-colors">
+                Tech Nouns &amp; Action Verbs
+              </span>
+              <p className="text-sm text-muted-foreground mt-1">电脑 (Computer), 手机 (Phone), 做 (do), 买 (buy).</p>
+            </button>
+
+            <button 
+              onClick={() => scrollToLesson("final-exam-intermediate")} 
+              className="p-5 rounded-2xl bg-crimson/10 border-2 border-crimson/30 text-center hover:bg-crimson/20 hover:border-crimson transition-all sm:col-span-2 group cursor-pointer"
+            >
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <Award className="text-crimson w-6 h-6 animate-bounce" />
+                <span className="text-crimson font-black text-xl">Intermediate Final Exam</span>
+              </div>
+              <span className="text-ink font-medium">Test your mastery of Phase 3 &amp; Phase 4!</span>
             </button>
           </div>
         )}
@@ -349,15 +449,15 @@ export default function ChineseHub() {
         <div id="lessons" className="space-y-6 pt-6 scroll-mt-20">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl sm:text-3xl font-black text-ink">
-              {activeTab === "phase1" ? "Phase 1 Lessons" : "Phase 2 Lessons"}
+              {activeTab === "beginner" ? "Beginner Lessons (Phase 1 & 2)" : "Intermediate Lessons (Phase 3 & 4)"}
             </h2>
             <span className="text-xs sm:text-sm text-muted-foreground font-semibold">
-              {activeTab === "phase1" ? "2 Lessons" : "4 Lessons + 1 Final Exam"}
+              {activeTab === "beginner" ? "6 Lessons + 1 Exam" : "4 Lessons + 1 Exam"}
             </span>
           </div>
 
           <div className="grid gap-4 sm:gap-6">
-            {(activeTab === "phase1" ? phase1Lessons : phase2Lessons).map((lesson) => (
+            {(activeTab === "beginner" ? beginnerLessons : intermediateLessons).map((lesson) => (
               <div 
                 id={lesson.id} 
                 key={lesson.id} 
@@ -371,7 +471,7 @@ export default function ChineseHub() {
                 </div>
                 
                 <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-                  {lesson.id === "final-exam" ? (
+                  {lesson.id.startsWith("final-exam") ? (
                     <Link
                       href={`/chinese/workbook/${lesson.id}`}
                       className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-crimson text-paper px-6 py-2.5 rounded-xl font-bold hover:bg-opacity-90 transition-colors whitespace-nowrap shadow-xs"

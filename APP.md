@@ -125,3 +125,51 @@ Based on **Mr. Wei's Chinese Class for Khaopan**:
      4. Actions & Objects (吃, 喝, 看, 水, 书, 苹果, 爸爸, 妈妈, 马)
      5. Locations & Time (在, 家, 学校, 商店, 今天, 明天, 点)
      6. Tech Nouns & Radicals (电脑, 手机, 做, 买, 语, 海, 休, 林)
+
+---
+
+## 3. Korean Module Parity & Architectural Alignment
+
+The Chinese and Korean modules share a unified component design and pedagogical workflow:
+
+| Feature | Korean Module (`/korean`) | Chinese Module (`/chinese`) | Parity Status |
+| :--- | :--- | :--- | :---: |
+| **Curriculum Scope** | 26 Lessons (Hangeul, Beginner, Intermediate) | 10 Lessons + 2 Final Exams (Phases 1–4) | ✅ Complete |
+| **Interactive Quizzes** | 26 Workbooks (8 questions each) | 10 Workbooks + 2 Exams (8 questions each) | ✅ Complete |
+| **Navigation Tabs** | Responsive 3-Column Card Grid (쓰기 연습, 초급, 중급) | Responsive 3-Column Card Grid (书, 初, 进) | ✅ Identical |
+| **Audio Pronunciation** | Korean TTS (`ko-KR`) for sentences & quiz items | Mandarin TTS (`zh-CN`) for sentences & quiz items | ✅ Complete |
+| **Handwriting Pad** | Hangeul Stroke Pad (`kor` Tesseract OCR) | Hanzi Stroke Pad (`chi_sim` Tesseract OCR) | ✅ Complete |
+| **Visual Identity** | Royal Plum & Indigo accents (`#3a3d98`, `#9333ea`) | Imperial Crimson & Gold accents (`#bc2b2b`, `#d4af37`) | ✅ Themed |
+
+---
+
+## 4. Technical Architecture & Engineering Standards
+
+1. **Next.js 16 App Router Dynamic Route Contracts:**
+   - Both `/chinese/lesson/[id]`, `/chinese/workbook/[id]`, `/korean/lesson/[id]`, and `/korean/workbook/[id]` handle `params` as asynchronous promises:
+     ```tsx
+     interface PageProps {
+       params: Promise<{ id: string }>;
+     }
+     export default async function Page({ params }: PageProps) {
+       const { id } = await params;
+       // ...
+     }
+     ```
+2. **Robust Client Audio (`AudioPlayerButton.tsx`):**
+   - Direct integration with Web SpeechSynthesis API.
+   - Smart language fallback for `zh-CN` (Mandarin) and `ko-KR` (Korean).
+   - Event propagation isolation (`e.stopPropagation()`) prevents inadvertent multiple-choice answer selection during audio playback.
+3. **Stroke Verification (`WritingPad.tsx`):**
+   - HTML5 Canvas touch/mouse drawing with stroke clearing, smooth quadratic bezier interpolation, and canvas-to-blob normalization.
+   - Client-side OCR via Tesseract.js with locale-specific dictionary whitening and visual character confusion fallbacks.
+
+---
+
+## 5. Verification & Quality Assurance
+
+- **TypeScript Compilation:** `npx tsc --noEmit` passed with 0 errors.
+- **ESLint Validation:** `npm run lint` passed with 0 warnings and 0 errors.
+- **Production Build:** `npm run build` completed via Turbopack with all 11 routes successfully generated.
+- **Git Tracking:** Synchronized with remote `origin/main` at `https://github.com/ChaoprayaSoft/LanguageHub.git`.
+

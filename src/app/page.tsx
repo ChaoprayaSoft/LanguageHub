@@ -40,7 +40,7 @@ export default function Home() {
             </div>
           </Link>
 
-          {/* Chinese Path (Active Phase 1 & 2) */}
+          {/* Chinese Path (Active Phases 1–4) */}
           <Link href="/chinese" className="group relative p-6 sm:p-8 border border-muted rounded-3xl bg-paper hover:border-crimson hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 text-left flex flex-col justify-between h-[250px] sm:h-[300px]">
             <div className="space-y-3 sm:space-y-4">
               <div className="flex items-center justify-between">

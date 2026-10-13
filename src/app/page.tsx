@@ -40,7 +40,7 @@ export default function Home() {
             </div>
           </Link>
 
-          {/* Chinese Path (Active Phases 1–4) */}
+          {/* Chinese Path (Active HSK 1 & HSK 2: Phases 1–8) */}
           <Link href="/chinese" className="group relative p-6 sm:p-8 border border-muted rounded-3xl bg-paper hover:border-crimson hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 text-left flex flex-col justify-between h-[250px] sm:h-[300px]">
             <div className="space-y-3 sm:space-y-4">
               <div className="flex items-center justify-between">
@@ -50,7 +50,7 @@ export default function Home() {
 
               </div>
               <h2 className="text-xl sm:text-2xl font-bold text-ink group-hover:text-crimson transition-colors">Chinese</h2>
-              <p className="text-sm sm:text-base text-muted-foreground">Start with Mr. Wei&apos;s class. Master Pinyin, core grammar, radicals, time, and tech logic (Phases 1–4).</p>
+              <p className="text-sm sm:text-base text-muted-foreground">Start with Mr. Wei&apos;s class. Master HSK 1 foundations and HSK 2 logic engine with modal verbs, state tracking, and boolean routing (Lessons 1–19).</p>
             </div>
             <div className="flex items-center text-crimson font-medium text-sm sm:text-base">
               Start Learning <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />

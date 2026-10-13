@@ -36,19 +36,20 @@ const practiceSets: { id: string; name: string; items: PracticeItem[] }[] = [
   },
   { 
     id: "pronouns", 
-    name: "Pronouns & Identity (人称与身份)", 
+    name: "Pronouns & Roles (人称与身份)", 
     items: [
       { char: "我", meaning: "I / Me", pinyin: "wǒ" },
       { char: "你", meaning: "You", pinyin: "nǐ" },
       { char: "他", meaning: "He / Him", pinyin: "tā" },
       { char: "她", meaning: "She / Her", pinyin: "tā" },
       { char: "是", meaning: "Am / Is / Are (To be)", pinyin: "shì" },
-      { char: "学生", meaning: "Student", pinyin: "xué sheng" }
+      { char: "学生", meaning: "Student", pinyin: "xué sheng" },
+      { char: "老师", meaning: "Teacher", pinyin: "lǎo shī" }
     ] 
   },
   { 
     id: "actions", 
-    name: "Action Verbs & Objects (动作与实物)", 
+    name: "Actions & Objects (动作与实物)", 
     items: [
       { char: "吃", meaning: "to eat", pinyin: "chī" },
       { char: "喝", meaning: "to drink", pinyin: "hē" },
@@ -87,11 +88,61 @@ const practiceSets: { id: string; name: string; items: PracticeItem[] }[] = [
       { char: "休", meaning: "Rest (Person + Tree)", pinyin: "xiū" },
       { char: "林", meaning: "Forest (Wood + Wood)", pinyin: "lín" }
     ] 
+  },
+  { 
+    id: "counters_calendar", 
+    name: "Counters & Calendar (量词与日历 · Phase 5)", 
+    items: [
+      { char: "个", meaning: "General Measure Word", pinyin: "ge" },
+      { char: "本", meaning: "Measure Word for books", pinyin: "běn" },
+      { char: "杯", meaning: "Cup / Glass of liquid", pinyin: "bēi" },
+      { char: "部", meaning: "Measure Word for devices", pinyin: "bù" },
+      { char: "两", meaning: "Two (when counting)", pinyin: "liǎng" },
+      { char: "不", meaning: "No / Not (habit/future)", pinyin: "bù" },
+      { char: "没", meaning: "Negation for 有 / past", pinyin: "méi" },
+      { char: "有", meaning: "to have", pinyin: "yǒu" },
+      { char: "月", meaning: "Month", pinyin: "yuè" },
+      { char: "星期", meaning: "Week", pinyin: "xīng qī" },
+      { char: "号", meaning: "Day of month (spoken)", pinyin: "hào" }
+    ] 
+  },
+  { 
+    id: "permissions_skills", 
+    name: "Modal Verbs & Permissions (情态动词 · Phase 6)", 
+    items: [
+      { char: "想", meaning: "would like to / to miss", pinyin: "xiǎng" },
+      { char: "要", meaning: "want / need to / going to", pinyin: "yào" },
+      { char: "咖啡", meaning: "Coffee", pinyin: "kā fēi" },
+      { char: "去", meaning: "to go", pinyin: "qù" },
+      { char: "会", meaning: "can (learned skill)", pinyin: "huì" },
+      { char: "能", meaning: "can (physical ability)", pinyin: "néng" },
+      { char: "可以", meaning: "can / may (permission)", pinyin: "kě yǐ" },
+      { char: "说", meaning: "to speak / say", pinyin: "shuō" },
+      { char: "饭", meaning: "Meal / Rice", pinyin: "fàn" },
+      { char: "代码", meaning: "Code", pinyin: "dài mǎ" }
+    ] 
+  },
+  { 
+    id: "state_logic", 
+    name: "State Tracking & Comparisons (状态与比较 · Phase 7-8)", 
+    items: [
+      { char: "了", meaning: "Completion flag (isCompleted)", pinyin: "le" },
+      { char: "昨天", meaning: "Yesterday", pinyin: "zuó tiān" },
+      { char: "过", meaning: "Past experience flag", pinyin: "guò" },
+      { char: "中国", meaning: "China", pinyin: "zhōng guó" },
+      { char: "因为", meaning: "Because", pinyin: "yīn wèi" },
+      { char: "所以", meaning: "Therefore / So", pinyin: "suǒ yǐ" },
+      { char: "雨", meaning: "Rain", pinyin: "yǔ" },
+      { char: "钱", meaning: "Money", pinyin: "qián" },
+      { char: "比", meaning: "Comparison operator (>)", pinyin: "bǐ" },
+      { char: "高", meaning: "Tall / High", pinyin: "gāo" },
+      { char: "热", meaning: "Hot", pinyin: "rè" }
+    ] 
   }
 ];
 
 export default function ChineseHub() {
-  const [activeTab, setActiveTab] = useState<"practice" | "beginner" | "intermediate">("practice");
+  const [activeTab, setActiveTab] = useState<"practice" | "hsk1" | "hsk2">("practice");
   const [activeSetId, setActiveSetId] = useState(practiceSets[0].id);
   const [practiceCharIndex, setPracticeCharIndex] = useState(0);
 
@@ -105,13 +156,13 @@ export default function ChineseHub() {
     }
   };
 
-  const beginnerLessons = [
-    ...chineseData.lessons.slice(0, 6),
+  const hsk1Lessons = [
+    ...chineseData.lessons.slice(0, 13),
     chineseData.lessons.find(l => l.id === "final-exam")!
   ];
 
-  const intermediateLessons = [
-    ...chineseData.lessons.slice(6, 10),
+  const hsk2Lessons = [
+    ...chineseData.lessons.slice(13, 19),
     chineseData.lessons.find(l => l.id === "final-exam-intermediate")!
   ];
 
@@ -123,7 +174,7 @@ export default function ChineseHub() {
           <span className="w-5 h-5 rounded-full bg-crimson text-paper flex items-center justify-center font-serif text-xs font-bold shadow-xs">
             印
           </span>
-          <span>Chinese Master Plan · 阶段一至阶段四 (Phase 1 to 4)</span>
+          <span>Chinese Master Plan · 阶段一至阶段八 (Lessons 1 to 19)</span>
         </div>
 
         <h1 className="text-4xl md:text-6xl font-black text-ink tracking-tight flex items-center justify-center gap-3">
@@ -131,9 +182,9 @@ export default function ChineseHub() {
         </h1>
         
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          Welcome, Khaopan! Master Chinese from zero with 
-          <strong className="text-ink font-semibold"> Phase 1 &amp; 2 (Pronunciation &amp; Core Grammar)</strong> and 
-          <strong className="text-ink font-semibold"> Phase 3 &amp; 4 (Radicals, Locations, Time &amp; Tech Logic)</strong>.
+          Welcome, Khaopan! Master Chinese with 
+          <strong className="text-ink font-semibold"> HSK 1 Foundations (Phases 1–5: Pinyin, Grammar, Radicals, Time &amp; Counters)</strong> and 
+          <strong className="text-ink font-semibold"> HSK 2 Logic Engine (Phases 6–8: Modal Verbs, State Tracking &amp; Boolean Routing)</strong>.
         </p>
       </div>
 
@@ -155,16 +206,16 @@ export default function ChineseHub() {
             </span>
             <div className="flex flex-col items-start sm:items-center text-left sm:text-center leading-tight">
               <span className="text-sm sm:text-base font-bold">Writing Practice</span>
-              <span className="text-xs opacity-75 font-normal">汉字书写 · Stroke Pad</span>
+              <span className="text-xs opacity-75 font-normal">汉字书写 · 9 Practice Sets</span>
             </div>
           </button>
 
-          {/* Tab 2: Beginner (Phase 1 & 2) */}
+          {/* Tab 2: HSK 1 Foundation */}
           <button
             type="button"
-            onClick={() => setActiveTab("beginner")}
+            onClick={() => setActiveTab("hsk1")}
             className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-200 flex items-center justify-center gap-3 text-center cursor-pointer ${
-              activeTab === "beginner" 
+              activeTab === "hsk1" 
                 ? "bg-paper text-crimson font-black shadow-md border border-crimson/30 scale-[1.01]" 
                 : "text-muted-foreground hover:text-ink hover:bg-paper/60 font-semibold"
             }`}
@@ -173,17 +224,17 @@ export default function ChineseHub() {
               初
             </span>
             <div className="flex flex-col items-start sm:items-center text-left sm:text-center leading-tight">
-              <span className="text-sm sm:text-base font-bold">Beginner Level</span>
-              <span className="text-xs opacity-75 font-normal">Phase 1 &amp; 2 · Pinyin &amp; S-V-O</span>
+              <span className="text-sm sm:text-base font-bold">HSK 1 Foundation</span>
+              <span className="text-xs opacity-75 font-normal">Phases 1–5 · Lessons 1–13</span>
             </div>
           </button>
 
-          {/* Tab 3: Intermediate (Phase 3 & 4) */}
+          {/* Tab 3: HSK 2 Logic Engine */}
           <button
             type="button"
-            onClick={() => setActiveTab("intermediate")}
+            onClick={() => setActiveTab("hsk2")}
             className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl transition-all duration-200 flex items-center justify-center gap-3 text-center cursor-pointer ${
-              activeTab === "intermediate" 
+              activeTab === "hsk2" 
                 ? "bg-paper text-crimson font-black shadow-md border border-crimson/30 scale-[1.01]" 
                 : "text-muted-foreground hover:text-ink hover:bg-paper/60 font-semibold"
             }`}
@@ -192,8 +243,8 @@ export default function ChineseHub() {
               进
             </span>
             <div className="flex flex-col items-start sm:items-center text-left sm:text-center leading-tight">
-              <span className="text-sm sm:text-base font-bold">Intermediate Level</span>
-              <span className="text-xs opacity-75 font-normal">Phase 3 &amp; 4 · Radicals &amp; Logic</span>
+              <span className="text-sm sm:text-base font-bold">HSK 2 Logic Engine</span>
+              <span className="text-xs opacity-75 font-normal">Phases 6–8 · Lessons 14–19</span>
             </div>
           </button>
         </div>
@@ -209,8 +260,8 @@ export default function ChineseHub() {
                 <span>Hanzi Character Practice</span>
               </>
             )}
-            {activeTab === "beginner" && "Beginner: Phase 1 & 2 Foundations"}
-            {activeTab === "intermediate" && "Intermediate: Phase 3 & 4 Modular Logic"}
+            {activeTab === "hsk1" && "HSK 1: Fundamental Grammar & Vocabulary"}
+            {activeTab === "hsk2" && "HSK 2: Advanced Logical & Modular System"}
           </h2>
 
           {activeTab === "practice" && (
@@ -258,7 +309,7 @@ export default function ChineseHub() {
                 <button
                   key={`${item.char}-${idx}`}
                   onClick={() => setPracticeCharIndex(idx)}
-                  className={`px-4 h-12 min-w-12 rounded-xl font-bold text-lg sm:text-xl transition-all whitespace-nowrap cursor-pointer ${
+                  className={`px-3.5 h-11 min-w-11 rounded-xl font-bold text-base sm:text-lg transition-all whitespace-nowrap cursor-pointer ${
                     idx === practiceCharIndex 
                       ? "bg-crimson text-white shadow-md scale-105" 
                       : "bg-muted text-ink hover:bg-muted-foreground/20"
@@ -271,174 +322,87 @@ export default function ChineseHub() {
           </div>
         )}
 
-        {/* Beginner Jump Grid (Lessons 1-6 + Exam) */}
-        {activeTab === "beginner" && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <button 
-              onClick={() => scrollToLesson("lesson-1")} 
-              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 1</span>
-                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Pinyin &amp; Tones</span>
-              </div>
-              <span className="text-ink font-bold text-lg block group-hover:text-crimson transition-colors">
-                Pinyin and The Four Tones
-              </span>
-              <p className="text-sm text-muted-foreground mt-1">Master initials, finals, and pitch movement.</p>
-            </button>
-
-            <button 
-              onClick={() => scrollToLesson("lesson-2")} 
-              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 2</span>
-                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Greetings &amp; Numbers</span>
-              </div>
-              <span className="text-ink font-bold text-lg block group-hover:text-crimson transition-colors">
-                Greetings and Numbers
-              </span>
-              <p className="text-sm text-muted-foreground mt-1">你好, 谢谢, 再见 &amp; Numbers 1 to 10.</p>
-            </button>
-
-            <button 
-              onClick={() => scrollToLesson("lesson-3")} 
-              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 3</span>
-                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">S-V-O Base</span>
-              </div>
-              <span className="text-ink font-bold text-lg block group-hover:text-crimson transition-colors">
-                The &quot;To Be&quot; Verb &amp; Pronouns
-              </span>
-              <p className="text-sm text-muted-foreground mt-1">我, 你, 他, 是 (shì) and identity sentences.</p>
-            </button>
-
-            <button 
-              onClick={() => scrollToLesson("lesson-4")} 
-              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 4</span>
-                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Actions</span>
-              </div>
-              <span className="text-ink font-bold text-lg block group-hover:text-crimson transition-colors">
-                Action Verbs and Objects
-              </span>
-              <p className="text-sm text-muted-foreground mt-1">吃 (eat), 喝 (drink), 看 (read) + objects.</p>
-            </button>
-
-            <button 
-              onClick={() => scrollToLesson("lesson-5")} 
-              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 5</span>
-                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Interrogation</span>
-              </div>
-              <span className="text-ink font-bold text-lg block group-hover:text-crimson transition-colors">
-                Asking Questions (吗 &amp; 什么)
-              </span>
-              <p className="text-sm text-muted-foreground mt-1">Yes/No questions with 吗 &amp; &quot;What?&quot; with 什么.</p>
-            </button>
-
-            <button 
-              onClick={() => scrollToLesson("lesson-6")} 
-              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 6</span>
-                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Possession</span>
-              </div>
-              <span className="text-ink font-bold text-lg block group-hover:text-crimson transition-colors">
-                Possession (The Magic &quot;的&quot;)
-              </span>
-              <p className="text-sm text-muted-foreground mt-1">我的, 你的 &amp; family nouns (爸爸, 妈妈).</p>
-            </button>
+        {/* HSK 1 Jump Grid (Lessons 1-13 + Exam) */}
+        {activeTab === "hsk1" && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5">
+            {[
+              { id: "lesson-1", num: "1", tag: "Pinyin & Tones", title: "Pinyin & The Four Tones" },
+              { id: "lesson-2", num: "2", tag: "Greetings", title: "Greetings and Numbers" },
+              { id: "lesson-3", num: "3", tag: "S-V-O Base", title: "The 'To Be' Verb & Pronouns" },
+              { id: "lesson-4", num: "4", tag: "Actions", title: "Action Verbs and Objects" },
+              { id: "lesson-5", num: "5", tag: "Questions", title: "Asking Questions (吗 & 什么)" },
+              { id: "lesson-6", num: "6", tag: "Possession", title: "Possession (The Magic '的')" },
+              { id: "lesson-7", num: "7", tag: "Radicals", title: "The Logic of Radicals" },
+              { id: "lesson-8", num: "8", tag: "Location", title: "Adding 'Where' (Location 在)" },
+              { id: "lesson-9", num: "9", tag: "Timeline", title: "The Timeline (Time Words)" },
+              { id: "lesson-10", num: "10", tag: "Tech Nouns", title: "Tech Nouns & Action Verbs" },
+              { id: "lesson-11", num: "11", tag: "Counters", title: "The 'Counter' Plugin (个/本/杯/部)" },
+              { id: "lesson-12", num: "12", tag: "Negation", title: "System Error (不 vs 没)" },
+              { id: "lesson-13", num: "13", tag: "Calendar", title: "The Calendar Module (月/星期/号)" },
+            ].map(l => (
+              <button 
+                key={l.id}
+                onClick={() => scrollToLesson(l.id)} 
+                className="p-4 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
+              >
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-crimson font-black text-xs uppercase tracking-wider">Lesson {l.num}</span>
+                  <span className="text-[10px] bg-muted px-1.5 py-0.5 rounded text-muted-foreground">{l.tag}</span>
+                </div>
+                <span className="text-ink font-bold text-sm block group-hover:text-crimson transition-colors truncate">
+                  {l.title}
+                </span>
+              </button>
+            ))}
 
             <button 
               onClick={() => scrollToLesson("final-exam")} 
-              className="p-5 rounded-2xl bg-crimson/10 border-2 border-crimson/30 text-center hover:bg-crimson/20 hover:border-crimson transition-all sm:col-span-2 group cursor-pointer"
+              className="p-4 rounded-2xl bg-crimson/10 border-2 border-crimson/30 text-center hover:bg-crimson/20 hover:border-crimson transition-all sm:col-span-2 md:col-span-3 group cursor-pointer"
             >
-              <div className="flex items-center justify-center gap-2 mb-1">
-                <Award className="text-crimson w-6 h-6 animate-bounce" />
-                <span className="text-crimson font-black text-xl">Beginner Final Exam</span>
+              <div className="flex items-center justify-center gap-2">
+                <Award className="text-crimson w-5 h-5 animate-bounce" />
+                <span className="text-crimson font-black text-lg">HSK 1 Master Exam</span>
               </div>
-              <span className="text-ink font-medium">Test your mastery of Phase 1 &amp; Phase 2!</span>
+              <span className="text-ink text-xs font-medium">Comprehensive review testing Phases 1 to 5</span>
             </button>
           </div>
         )}
 
-        {/* Intermediate Jump Grid (Lessons 7-10 + Exam) */}
-        {activeTab === "intermediate" && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <button 
-              onClick={() => scrollToLesson("lesson-7")} 
-              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 7</span>
-                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Phase 3 · Radicals</span>
-              </div>
-              <span className="text-ink font-bold text-lg block group-hover:text-crimson transition-colors">
-                The Logic of Radicals
-              </span>
-              <p className="text-sm text-muted-foreground mt-1">氵(Water), 亻(Person), 讠(Speech), 木(Wood).</p>
-            </button>
-
-            <button 
-              onClick={() => scrollToLesson("lesson-8")} 
-              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 8</span>
-                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Phase 3 · Location</span>
-              </div>
-              <span className="text-ink font-bold text-lg block group-hover:text-crimson transition-colors">
-                Adding &quot;Where&quot; (Location)
-              </span>
-              <p className="text-sm text-muted-foreground mt-1">在 (zài) protocol: Subject + 在 Location + Verb + Object.</p>
-            </button>
-
-            <button 
-              onClick={() => scrollToLesson("lesson-9")} 
-              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 9</span>
-                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Phase 4 · Timeline</span>
-              </div>
-              <span className="text-ink font-bold text-lg block group-hover:text-crimson transition-colors">
-                The Timeline (Time Words)
-              </span>
-              <p className="text-sm text-muted-foreground mt-1">今天 (Today), 明天 (Tomorrow), 点 (O&apos;clock) positioning.</p>
-            </button>
-
-            <button 
-              onClick={() => scrollToLesson("lesson-10")} 
-              className="p-5 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-crimson font-black text-sm uppercase tracking-wider">Lesson 10</span>
-                <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">Phase 4 · Tech Logic</span>
-              </div>
-              <span className="text-ink font-bold text-lg block group-hover:text-crimson transition-colors">
-                Tech Nouns &amp; Action Verbs
-              </span>
-              <p className="text-sm text-muted-foreground mt-1">电脑 (Computer), 手机 (Phone), 做 (do), 买 (buy).</p>
-            </button>
+        {/* HSK 2 Jump Grid (Lessons 14-19 + Exam) */}
+        {activeTab === "hsk2" && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5">
+            {[
+              { id: "lesson-14", num: "14", tag: "Modal Verbs", title: "Desire and Planning (想 vs 要)" },
+              { id: "lesson-15", num: "15", tag: "Permissions", title: "Abilities & Permissions (会/能/可以)" },
+              { id: "lesson-16", num: "16", tag: "Completion Flag", title: "The Completion Flag (了)" },
+              { id: "lesson-17", num: "17", tag: "Database Logs", title: "Database Logs (过 & 没)" },
+              { id: "lesson-18", num: "18", tag: "Logic Conjunctions", title: "Because & Therefore (因为...所以)" },
+              { id: "lesson-19", num: "19", tag: "Comparisons", title: "The Comparison Operator (比)" },
+            ].map(l => (
+              <button 
+                key={l.id}
+                onClick={() => scrollToLesson(l.id)} 
+                className="p-4 rounded-2xl bg-muted/40 border border-muted text-left hover:bg-crimson/5 hover:border-crimson transition-all group cursor-pointer"
+              >
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-crimson font-black text-xs uppercase tracking-wider">Lesson {l.num}</span>
+                  <span className="text-[10px] bg-muted px-1.5 py-0.5 rounded text-muted-foreground">{l.tag}</span>
+                </div>
+                <span className="text-ink font-bold text-sm block group-hover:text-crimson transition-colors truncate">
+                  {l.title}
+                </span>
+              </button>
+            ))}
 
             <button 
               onClick={() => scrollToLesson("final-exam-intermediate")} 
-              className="p-5 rounded-2xl bg-crimson/10 border-2 border-crimson/30 text-center hover:bg-crimson/20 hover:border-crimson transition-all sm:col-span-2 group cursor-pointer"
+              className="p-4 rounded-2xl bg-crimson/10 border-2 border-crimson/30 text-center hover:bg-crimson/20 hover:border-crimson transition-all sm:col-span-2 md:col-span-3 group cursor-pointer"
             >
-              <div className="flex items-center justify-center gap-2 mb-1">
-                <Award className="text-crimson w-6 h-6 animate-bounce" />
-                <span className="text-crimson font-black text-xl">Intermediate Final Exam</span>
+              <div className="flex items-center justify-center gap-2">
+                <Award className="text-crimson w-5 h-5 animate-bounce" />
+                <span className="text-crimson font-black text-lg">HSK 2 Master Exam</span>
               </div>
-              <span className="text-ink font-medium">Test your mastery of Phase 3 &amp; Phase 4!</span>
+              <span className="text-ink text-xs font-medium">Comprehensive review testing Phases 6 to 8</span>
             </button>
           </div>
         )}
@@ -449,21 +413,24 @@ export default function ChineseHub() {
         <div id="lessons" className="space-y-6 pt-6 scroll-mt-20">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl sm:text-3xl font-black text-ink">
-              {activeTab === "beginner" ? "Beginner Lessons (Phase 1 & 2)" : "Intermediate Lessons (Phase 3 & 4)"}
+              {activeTab === "hsk1" ? "HSK 1 Curriculum (Lessons 1–13)" : "HSK 2 Curriculum (Lessons 14–19)"}
             </h2>
             <span className="text-xs sm:text-sm text-muted-foreground font-semibold">
-              {activeTab === "beginner" ? "6 Lessons + 1 Exam" : "4 Lessons + 1 Exam"}
+              {activeTab === "hsk1" ? "13 Lessons + 1 Final Exam" : "6 Lessons + 1 Final Exam"}
             </span>
           </div>
 
           <div className="grid gap-4 sm:gap-6">
-            {(activeTab === "beginner" ? beginnerLessons : intermediateLessons).map((lesson) => (
+            {(activeTab === "hsk1" ? hsk1Lessons : hsk2Lessons).map((lesson) => (
               <div 
                 id={lesson.id} 
                 key={lesson.id} 
                 className="group p-5 sm:p-6 border border-muted rounded-2xl bg-paper hover:shadow-lg hover:border-crimson/40 transition-all flex flex-col sm:flex-row gap-4 sm:gap-6 justify-between items-start sm:items-center scroll-mt-10"
               >
                 <div className="w-full">
+                  <div className="inline-block text-xs uppercase font-extrabold tracking-wider text-crimson bg-crimson/10 px-2 py-0.5 rounded-md mb-2">
+                    {lesson.phase}
+                  </div>
                   <h3 className="text-lg sm:text-xl font-bold text-ink group-hover:text-crimson transition-colors mb-1 sm:mb-2">
                     {lesson.title}
                   </h3>

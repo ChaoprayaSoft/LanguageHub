@@ -112,6 +112,26 @@ export default async function ChineseLessonPage({ params }: { params: Promise<{ 
                 </li>
               );
             },
+            blockquote: ({ node, children, ...props }) => {
+              const getText = (n: HastNode | undefined): string => {
+                if (!n) return "";
+                if (n.type === "text" && n.value) return n.value;
+                if (n.children) return n.children.map(getText).join("");
+                return "";
+              };
+              const text = node ? getText(node as HastNode) : "";
+              const chineseMatches = text.match(/[\u4e00-\u9fff]+/g);
+              const chineseOnlyText = chineseMatches?.join(" ") || "";
+
+              return (
+                <blockquote className="my-4 border-l-4 border-crimson pl-4 py-2 italic bg-crimson/5 rounded-r-xl pr-4 flex items-center justify-between gap-3" {...props}>
+                  <div className="flex-1 not-italic">{children}</div>
+                  {chineseOnlyText && (
+                    <AudioPlayerButton text={chineseOnlyText} lang="zh-CN" accentColor="crimson" size="sm" />
+                  )}
+                </blockquote>
+              );
+            },
             p: ({ node, children, ...props }) => {
               const getText = (n: HastNode | undefined): string => {
                 if (!n) return "";
@@ -120,7 +140,7 @@ export default async function ChineseLessonPage({ params }: { params: Promise<{ 
                 return "";
               };
               const text = node ? getText(node as HastNode) : "";
-              const isExample = text.toLowerCase().includes("example:") || text.includes("Example");
+              const isExample = /example|skill|ability|permission|priority|sentence|correction|merged|formula|cause|effect|logic|wrong|right/i.test(text);
               const chineseMatches = text.match(/[\u4e00-\u9fff]+/g);
               const chineseOnlyText = chineseMatches?.join(" ") || "";
 

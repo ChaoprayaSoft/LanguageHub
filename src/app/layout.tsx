@@ -48,7 +48,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <div className="flex-1">{children}</div>
         <Analytics />
-        <footer className="w-full border-t border-muted bg-paper text-center py-6 px-4 text-sm text-muted-foreground mt-auto">
+        <footer className="w-full border-t border-muted bg-paper text-center py-4 sm:py-6 px-4 text-xs sm:text-sm text-muted-foreground mt-auto">
           <p className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
             <span>© 2026 ChaoprayaSoft, THAILAND</span>
             <span className="hidden sm:inline">|</span>

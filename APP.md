@@ -31,6 +31,7 @@ The platform currently provides two fully realized curricula:
 | :--- | :---: | :---: | :--- |
 | **Architecture & Structure** | **10.0 / 10** | 🟢 Production Ready | Next.js App Router, clean data separation (`korean.ts`, `chinese.ts`), unified components. |
 | **Code Quality & Typing** | **10.0 / 10** | 🟢 Green | **0 ESLint errors**, **0 ESLint warnings**, 100% strict TypeScript compliance (`tsc --noEmit`). |
+| **Mobile Responsiveness** | **10.0 / 10** | 🟢 Optimized | Fluid responsive typography, unclipped scrolling, touch-optimized card buttons (`active:scale-[0.99]`), 4-pill highlight bar. |
 | **Multi-Language OCR** | **9.5 / 10** | 🟢 Operational | `WritingPad.tsx` supports Korean (`kor`) and Chinese (`chi_sim`) with expanded character confusion matrices across 9 sets. |
 | **Oriental Aesthetics** | **10.0 / 10** | 🟢 Exceptional | Segmented 3-column navigation tabs (书, 初, 进), traditional seals (印), Imperial Crimson & Gold palettes. |
 | **Audio Pronunciation** | **10.0 / 10** | 🟢 Comprehensive | Inline Mandarin TTS audio buttons (`zh-CN`) on tables, lists, example cards, blockquotes, and workbook questions/options. |
@@ -228,6 +229,11 @@ The Chinese and Korean modules share a unified component design and pedagogical 
 3. **Stroke Verification (`WritingPad.tsx`):**
    - HTML5 Canvas touch/mouse drawing with stroke clearing, smooth quadratic bezier interpolation, and canvas-to-blob normalization.
    - Client-side OCR via Tesseract.js with locale-specific dictionary whitening and visual character confusion fallbacks.
+4. **Mobile Responsiveness & Touch Ergonomics (`page.tsx` & `layout.tsx`):**
+   - Fluid typography scaling (`text-3xl` to `text-7xl`) preventing horizontal text blowout on 320px–390px screens.
+   - Responsive Next.js Image `sizes` contract for high-DPI smartphone screens.
+   - Removal of container-level clipping (`overflow-hidden`) enabling smooth vertical scrolling.
+   - High-contrast, tactile touch feedback (`active:scale-[0.99]`) and compact footer proportions.
 
 ---
 
